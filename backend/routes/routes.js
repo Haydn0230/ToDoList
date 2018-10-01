@@ -7,6 +7,8 @@ router = (app) => {
     // .get((req,res) => myControllers.viewSingle(app,req,res))
     .get((req,res)=>myControllers.viewAll(app,req,res))
     .post((req,res)=>myControllers.addListItem(app,req,res))
+    .put((req, res)=>myControllers.editList(app,req,res))
+    .delete((req,res)=>myControllers(app,req,res))
 }
 
 module.exports = router;
