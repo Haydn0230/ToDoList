@@ -14,7 +14,7 @@ routes(app)
 
 var MongoClient = require('mongodb').MongoClient
 MongoClient.connect('mongodb://localhost:27017', {useNewUrlParser:true}, function(err, client) {
-    app.set('toDoDb', client.db('list'));
+    app.set('toDoDb', client.db('toDoDb'));
 })
 
 app.listen(3000)

@@ -5,6 +5,7 @@ module.exports = {
                 console.error(err)
             }
             res.json(docs)
+            console.info("1");
         })
     },
     viewSingle: (app,req,res) => {
@@ -14,6 +15,7 @@ module.exports = {
                 console.error(err)
             }
             res.json(docs)
+            console.info("2");
         })
     },
     addListItem: (app, req, res) => {

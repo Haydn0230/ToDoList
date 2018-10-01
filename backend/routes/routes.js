@@ -3,10 +3,10 @@ var router = express.Router();
 var myControllers = require('../controllers/controllers.js');
 
 router = (app) => {
-    app.route('/todo')
-    .get((req,res) => {
-      
-    });
+    app.route('/todoall')
+    // .get((req,res) => myControllers.viewSingle(app,req,res))
+    .get((req,res)=>myControllers.viewAll(app,req,res))
+    .post((req,res)=>myControllers.addListItem(app,req,res))
 }
 
 module.exports = router;
