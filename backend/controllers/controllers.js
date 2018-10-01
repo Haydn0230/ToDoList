@@ -1,6 +1,6 @@
 module.exports = {
     viewAll: (app, req, res) => {
-        app.get('').collection('').find({}).toArray((err, docs)=>{
+        app.get('toDoDb').collection('list').find({}).toArray((err, docs)=>{
             if (err) {
                 console.error(err)
             }
@@ -9,7 +9,7 @@ module.exports = {
     },
     viewSingle: (app,req,res) => {
         let listID = parseInt(req.params.listID);
-        app.get('').collection('').find({"listID":listID}).toArray((err,docs)=>{
+        app.get('toDoDb').collection('list').find({"listID":listID}).toArray((err,docs)=>{
             if (err) {
                 console.error(err)
             }
@@ -21,7 +21,7 @@ module.exports = {
         let listID = parseInt(newListItem.listID);
         newListItem.listID = listID;
 
-        app.get('').collection('').insertOne(newListItem, (err,docs) => {
+        app.get('toDoDb').collection('list').insertOne(newListItem, (err,docs) => {
             if (err) {
                 console.error(err)
             }
@@ -32,7 +32,7 @@ module.exports = {
         let ammendListItem = req.body;
         let listID = parseInt(ammendListItem.listID);
         
-        app.get('').collection('').updateOne(
+        app.get('toDoDb').collection('list').updateOne(
             {"listID":listID},
             {
                 $set: {
@@ -59,7 +59,7 @@ module.exports = {
     deleteListItem: (app,req,res) => {
         let removeListItem =req.body;
         let listID = parseInt(removeListItem.listID);
-        app.get('').collection('').deleteOne(
+        app.get('toDoDb').collection('list').deleteOne(
             {"listID": listID},
             (err, dbResp) => {
                 if (err) {
