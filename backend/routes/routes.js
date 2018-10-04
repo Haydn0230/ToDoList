@@ -1,14 +1,13 @@
-var express = require('express');
-var router = express.Router();
-var myControllers = require('../controllers/controllers.js');
+let express = require('express');
+let router = express.Router();
+let myControllersList = require('../controllers/controllers.js');
+let myControllersUser =require('../controllers/userControllers.js')
 
-router = (app) => {
-    app.route('/todoall')
-    // .get((req,res) => myControllers.viewSingle(app,req,res))
-    .get((req,res)=>myControllers.viewAll(app,req,res))
-    .post((req,res)=>myControllers.addListItem(app,req,res))
-    .put((req, res)=>myControllers.editList(app,req,res))
-    .delete((req,res)=>myControllers(app,req,res))
+
+router =(app) => {
+    app.route('/user')
+    .get((req,res)=>myControllersUser.findUser(req,res))
+    .post((req,res,next) =>myControllersUser.addUser(req,res,next))
 }
 
 module.exports = router;

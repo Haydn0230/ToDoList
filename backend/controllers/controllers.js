@@ -1,3 +1,5 @@
+
+
 module.exports = {
     viewAll: (app, req, res) => {
         app.get('toDoDb').collection('list').find({}).toArray((err, docs)=>{
