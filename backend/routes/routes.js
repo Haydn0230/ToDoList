@@ -6,8 +6,13 @@ let myControllersUser =require('../controllers/userControllers.js')
 
 router =(app) => {
     app.route('/user')
-    .get((req,res)=>myControllersUser.findUser(req,res))
-    .post((req,res,next) =>myControllersUser.addUser(req,res,next))
+    .post((req,res,next) =>myControllersUser.addUser(req,res,next));
+    
+    app.route('/user/:id')
+    .get((req,res,next) => myControllersUser.getUser(req,res,next))
+    .put((req,res,next)=> myControllersUser.putUser(req,res,next))
+    .delete((req,res,next) => myControllersUser.deleteUser(req,res,next));
 }
+
 
 module.exports = router;

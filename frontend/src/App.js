@@ -1,5 +1,7 @@
 import React, { Component } from '../node_modules/react';
 import './App.css';
+import './classes/logIn.js'
+import LogIn from './classes/logIn.js';
 
 class App extends Component {
   constructor() {
@@ -11,8 +13,8 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
-    fetch('/todoall')
+  componentDidMount(id) {
+    fetch(`/user/${id}`)
     .then(results => {
       return results.json();
     })
@@ -27,10 +29,7 @@ class App extends Component {
     
       return (
         <div className="App">
-          {this.componentDidMount()}
-          {this.state.data.map((item,index)=> (
-            <p>{item.userName}</p>
-          ))}
+          <LogIn />
         </div>
       );
   }
