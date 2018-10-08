@@ -1,4 +1,4 @@
-import React, { Component } from '../node_modules/react';
+import React, { Component } from '../../node_modules/react'
 
 class LogIn extends Component{
     constructor() {
@@ -6,6 +6,13 @@ class LogIn extends Component{
         this.state={};
     }
 
+    handleSubmit(e) {
+        e.preventDefault();
+        fetch('../../../backend/server.js')
+        .then((data)=>{
+            return data.json
+        }
+    }
 
     render() {
         return (
