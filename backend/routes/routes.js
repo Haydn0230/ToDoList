@@ -1,6 +1,6 @@
 let express = require('express');
 let router = express.Router();
-let myControllersList = require('../controllers/controllers.js');
+let myControllersProject = require('../controllers/projectController.js');
 let myControllersUser =require('../controllers/userControllers.js')
 
 
@@ -19,6 +19,16 @@ router =(app) => {
     .delete((req,res,next) => myControllersUser.deleteUser(req,res,next));
 
     // <<< List >>>
+    app.route('/addProject')
+    .post((req,res,next)=>myControllersProject.addProject(req,res,next));
+
+    app.route('/project/:id')
+    .get((req,res,next) =>myControllerProject.getProject(req,res,next))
+    .put((req,res,next)=>myControllersProject.putProject(req,res,next))
+    .delete((req,res,next) =>myControllersProject.deleteProject(req,res,next));
+
+    app.route('/addList/:id')
+    
 }
 
 
