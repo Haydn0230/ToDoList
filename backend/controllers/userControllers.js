@@ -4,24 +4,18 @@ const bcrypt = require('bcrypt');
 
 module.exports = {
     getUser: (req, res, next) => {
-        console.log(req.params.email)
         User.findById({ _id: req.params.id })
             .then((user) => {
                 res.send(user);
-
             })
             .catch(next);
     },
     addUser: (req, res, next) => {
-        //let hashPass = req.body.password;
-        //bcrypt.hash(req.body.password, 10, (err, hash) => {
-            //req.body.password = hash;
             User.create(req.body)
                 .then((user) => {
                     res.send(user);
                 })
                 .catch(next);
-        //});
 
     },
     postUser: (req, res, next) => {
