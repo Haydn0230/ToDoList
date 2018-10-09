@@ -45,9 +45,7 @@ module.exports = {
     putUser: (req, res, next) => {
         User.findByIdAndUpdate({ _id: req.params.id }, req.body)
             .then(() => {
-                // User.findOne({ _id: req.params.id }).then((user) => {
-                   res.json({"status":"200"});
-                // });
+                res.json({"status":"200"});
             }).catch(next);
     },
     deleteUser: (req, res, next) => {
