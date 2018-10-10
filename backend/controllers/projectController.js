@@ -31,24 +31,6 @@ module.exports = {
 
         });
     },
-    putProjectListItem: (req, res, next) => {
-        Project.findById({_id:req.params.id}, (err, project) => {
-            if (err) {
-                res.status(500).json({"status":"Error"});
-                next();
-            } else if (!project) {
-                res.status(404).json({"status":"not found"});
-                next();
-            }
-
-            project.listItem.push(req.body.listItem);
-            project.save(function(err){
-                if (err) throw err
-                res.status(200).json({"status":"success"});
-            });
-        });
-
-    },
     deleteProject: (req, res, next) => {
         Project.findByIdAndRemove({ _id: req.params.id })
             .then((project) => {

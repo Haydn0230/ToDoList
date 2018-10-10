@@ -24,12 +24,22 @@ router = (app) => {
     .post((req,res,next)=>myControllersProject.addProject(req,res,next));
 
     app.route('/project/:id')
-    .get((req,res,next) =>myControllerProject.getProject(req,res,next))
+    .get((req,res,next) =>myControllersProject.getProject(req,res,next))
     .put((req,res,next)=>myControllersProject.putProject(req,res,next))
     .delete((req,res,next) =>myControllersProject.deleteProject(req,res,next));
-
+    
+    // <<< List >>>
     app.route('/addList/:id')
     .put((req,res,next)=>myControllersList.putProjectAddListItem(req,res,next));
+    
+    app.route('/editList/:id')
+    .put((req,res,next)=>myControllersList.putEditList(req,res,next))
+    .delete((req,res,next) => myControllersList.deleteList(req,res,next));
+
+    // <<< Project Users >>>
+    app.route('/addProjectUser') 
+    .put((req,res,next)=> myControllersProUser.addProUser(req,res,next));
+
 }
 
 

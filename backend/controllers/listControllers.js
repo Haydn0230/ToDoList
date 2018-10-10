@@ -10,13 +10,14 @@ module.exports = {
     //         .catch(next);
     // },
     putProjectAddListItem: (req, res, next) => {
+        console.log(">>>>>1");
         Project.findById({_id:req.params.id}, (err, project) => {
             if (err) {
                 res.status(500).json({"status":"Error"});
-                next();
+                throw err;
             } else if (!project) {
                 res.status(404).json({"status":"not found"});
-                next();
+                throw err;
             }
 
             project.listItem.push(req.body.listItem);
@@ -26,18 +27,32 @@ module.exports = {
             });
         });
 
-    }
-    // putList: (req, res, next) => {
-    //     List.findByIdAndUpdate({ _id: req.params.id }, req.body)
-    //         .then(() => {
-    //             res.json({ "status": "200" });
-    //         }).catch(next);
-    // },
-    // deleteList: (req, res, next) => {
-    //     List.findByIdAndRemove({ _id: req.params.id })
-    //         .then((list) => {
-    //             res.send(list);
-    //         }).catch(next);
+    },
+    putEditList: (req, res, next) => {
+        Project.findById(req.params.id)
+        .then((project) => {
+            let listItem = project.listItem.id(req.body.listItem._id);
 
-    // }
+            listItem.set(req.body.listItem);
+
+            project.save().then((newProject)=> {
+                res.send(newProject);
+            })
+            .catch(next)
+        })
+        .catch(next)
+    },
+    deleteList: (req, res, next) => {
+         Project.findById(req.params.id)
+        .then((project) => {
+            let listItem = project.listItem.id(req.body.listItem._id).remove();
+            
+            project.save().then((newProject)=> {
+                res.send(newProject);
+            })
+            .catch(next)
+        })
+        .catch(next)
+
+    }
 }

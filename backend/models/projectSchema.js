@@ -4,8 +4,8 @@ const schema = mongoose.Schema;
 const ProjectSchema = new schema({
     projectTitle: { type: String, required: [true, 'project title needed'] },
     listItem: [{
-        listTitle: { type: String, required: [true, 'List Title required'] },
-        listItem: { type: String, required: [true, 'List Item required'] },
+        listTitle: { type: String },
+        listItem: { type: String },
         listOwnership: { type: String, default: 0 },
         listDateCreated: { type: Date, default: Date },
         listDateCompletion: { type: Date },
