@@ -1,10 +1,11 @@
-let express = require('express');
+const express = require('express');
 let router = express.Router();
-let myControllersProject = require('../controllers/projectController.js');
-let myControllersUser =require('../controllers/userControllers.js')
+const myControllersProject = require('../controllers/projectController.js');
+const myControllersUser = require('../controllers/userControllers.js');
+const myControllersList = require('../controllers/listControllers.js');
 
 
-router =(app) => {
+router = (app) => {
     // <<< Users >>>
     app.route('/addUser')
     .post((req,res,next) =>myControllersUser.addUser(req,res,next));
@@ -18,7 +19,7 @@ router =(app) => {
     .put((req,res,next)=> myControllersUser.putUser(req,res,next))
     .delete((req,res,next) => myControllersUser.deleteUser(req,res,next));
 
-    // <<< List >>>
+    // <<< Project >>>
     app.route('/addProject')
     .post((req,res,next)=>myControllersProject.addProject(req,res,next));
 
@@ -28,7 +29,7 @@ router =(app) => {
     .delete((req,res,next) =>myControllersProject.deleteProject(req,res,next));
 
     app.route('/addList/:id')
-    
+    .put((req,res,next)=>myControllersList.putProjectAddListItem(req,res,next));
 }
 
 

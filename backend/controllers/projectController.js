@@ -18,8 +18,20 @@ module.exports = {
             .catch(next);
 
     },
- 
-    putProject: (req, res, next) => {
+    putProject:(req,res,next) =>{
+        Project.findOneAndUpdate({_id:req.params.id},(req.body),{new:true}, (err, project) => {
+            if (err) {
+                throw err;
+            }
+            if (!project) {
+                res.status(500).json({"status":"Not Found"})
+            } else {
+                res.send(project);
+            }
+
+        });
+    },
+    putProjectListItem: (req, res, next) => {
         Project.findById({_id:req.params.id}, (err, project) => {
             if (err) {
                 res.status(500).json({"status":"Error"});
@@ -34,7 +46,7 @@ module.exports = {
                 if (err) throw err
                 res.status(200).json({"status":"success"});
             });
-        })
+        });
 
     },
     deleteProject: (req, res, next) => {
