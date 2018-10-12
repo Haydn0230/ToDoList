@@ -1,6 +1,7 @@
 const User = require('../models/userSchema');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const AuthUser = require('../authUser/authUser');
 
 module.exports = {
     getUser: (req, res, next) => {
@@ -11,15 +12,18 @@ module.exports = {
             .catch(next);
     },
     addUser: (req, res, next) => {
-            User.create(req.body)
-                .then((user) => {
-                    res.send(user);
-                })
-                .catch(next);
+        User.create(req.body)
+            .then((user) => {
+                user.password = 0;
+                var token = AuthUser.AuthenticateUser(user);
+                res.status(200).json({ "auth": "true", "token": token });
+            })
+            .catch(next);
 
     },
     postUser: (req, res, next) => {
         User.findOne({ email: req.body.email }, (err, user) => {
+
             if (err) {
                 throw err;
             }
@@ -28,9 +32,12 @@ module.exports = {
             } else {
                 bcrypt.compare(req.body.password, user.password, (err, hashesMatch) => {
                     if (hashesMatch === true) {
-                        res.status(200).json({ "status": "success" });
+                        user.password = '';
+                        let token = AuthUser.AuthenticateUser(user);
+                        res.status(200).json({ "auth": true, "token": token });
+                        //next(user);
                     } else {
-                        res.status(406).json({ "status": "failure" });
+                        res.status(401).json({ "status": "unauthorized" });
                     }
                 })
             }
@@ -39,7 +46,7 @@ module.exports = {
     putUser: (req, res, next) => {
         User.findByIdAndUpdate({ _id: req.params.id }, req.body)
             .then(() => {
-                res.json({"status":"200"});
+                res.json({ "status": "200" });
             }).catch(next);
     },
     deleteUser: (req, res, next) => {

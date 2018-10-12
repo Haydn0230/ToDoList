@@ -15,10 +15,10 @@ database._connect();
 
 routes(app)
 
+// app.use('/authUser', authUser);
 
 app.use((err,req,res,next)=> {
     res.status(422).send({error:err.message});
-    console.dir(err);
 });
 
 app.listen(3000)

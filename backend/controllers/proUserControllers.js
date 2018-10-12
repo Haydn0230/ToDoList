@@ -2,7 +2,7 @@ const Project = require('../models/projectSchema');
 const mongoose = require('mongoose');
 
 module.exports = {
-    putProjectAddListItem: (req, res, next) => {
+    putAddProUser: (req, res, next) => {
         console.log(">>>>>1");
         Project.findById({_id:req.params.id}, (err, project) => {
             if (err) {
@@ -13,7 +13,7 @@ module.exports = {
                 throw err;
             }
 
-            project.listItem.push(req.body.listItem);
+            project.userAccess.push(req.body.userAccess);
             project.save(function(err){
                 if (err) throw err
                 res.status(200).json({"status":"success"});
@@ -21,27 +21,14 @@ module.exports = {
         });
 
     },
-    putEditList: (req, res, next) => {
-        Project.findById(req.params.id)
-        .then((project) => {
-            let listItem = project.listItem.id(req.body.listItem._id);
-
-            listItem.set(req.body.listItem);
-
-            project.save().then((newProject)=> {
-                res.send(newProject);
-            })
-            .catch(next)
-        })
-        .catch(next)
-    },
-    deleteList: (req, res, next) => {
+    deleteProUser: (req, res, next) => {
          Project.findById(req.params.id)
         .then((project) => {
-            let listItem = project.listItem.id(req.body.listItem._id).remove();
+
+            let userAccess = project.userAccess.id(req.body.userAccess._id).remove();
             
-            project.save().then((newProject)=> {
-                res.send(newProject);
+            project.save().then((newUser)=> {
+                res.send(newUser);
             })
             .catch(next)
         })
