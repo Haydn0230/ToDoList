@@ -1,28 +1,42 @@
-import React, { Component } from '../../node_modules/react'
+import React, { Component } from '../../node_modules/react';
+import axios from 'axios';
 
 class LogIn extends Component{
     constructor() {
         super();
-        this.state={};
+        this.state={
+            email:"",
+            password:""
+        };
     }
-
-    handleSubmit(e) {
-        e.preventDefault();
-        fetch('../../../backend/server.js')
-        .then((data)=>{
-            return data.json
-        }
+    handleChange = event => {
+        this.setState({
+            [event.target.id]:event.target.value
+        });
+    }
+    handleSubmit = event => {
+        event.preventDefault();
+        axios.post('/verify',{
+            email: this.state.email,
+            password: this.state.password
+        })
+        .then((res)=>{
+            console.log(res);
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
     }
 
     render() {
         return (
             <div className="logIn">
             <form>
-                <label for='userName'/>
-                <input type='text' id='userName'/>
-                <label for ='password'/>
-                <input type ='text' id='password'/>
-                <button type='button'>Log In</button>
+                <label htmlFor="userName"/>
+                <input type='text' id='email' name="email" onChange={this.handleChange}/>
+                <label htmlFor ='password'/>
+                <input type ='password' id='password' name="password" onChange={this.handleChange}/>
+                <button onClick={this.handleSubmit} type='button'>Log In</button>
             </form>
             </div>
         )

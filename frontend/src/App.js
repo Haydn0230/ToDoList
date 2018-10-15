@@ -2,6 +2,7 @@ import React, { Component } from '../node_modules/react';
 import './App.css';
 import './classes/logIn.js'
 import LogIn from './classes/logIn.js';
+import {Router, Route} from 'react-router';
 
 class App extends Component {
   constructor() {
@@ -13,17 +14,17 @@ class App extends Component {
     };
   }
 
-  componentDidMount(id) {
-    fetch(`/user/${id}`)
-    .then(results => {
-      return results.json();
-    })
-    .then(res => {
-      this.setState({data:res})
-      console.dir(this.state.data);
-    })
+  // componentDidMount(id) {
+  //   fetch(`/user/${id}`)
+  //   .then(results => {
+  //     return results.json();
+  //   })
+  //   .then(res => {
+  //     this.setState({data:res})
+  //     console.dir(this.state.data);
+  //   })
 
-    }
+  //   }
   
   render() {
     
