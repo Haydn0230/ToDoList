@@ -23,7 +23,7 @@ module.exports = {
     },
     postUser: (req, res, next) => {
         User.findOne({ email: req.body.email }, (err, user) => {
-
+            console.log(req.body);
             if (err) {
                 throw err;
             }
@@ -35,6 +35,7 @@ module.exports = {
                         user.password = '';
                         let token = AuthUser.AuthenticateUser(user);
                         res.status(200).json({ "auth": true, "token": token });
+                        window.localStorage.setItem("token", token)
                         //next(user);
                     } else {
                         res.status(401).json({ "status": "unauthorized" });

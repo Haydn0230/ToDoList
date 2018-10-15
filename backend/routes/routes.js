@@ -12,7 +12,7 @@ router = (app) => {
     .post((req,res,next) =>myControllersUser.addUser(req,res,next));
 
     app.route('/verify')
-    .post(verify, (req,res,next)=> myControllersUser.postUser(req,res,next));
+    .post((req,res,next)=> myControllersUser.postUser(req,res,next));
     
 
     app.route('/user/:id')

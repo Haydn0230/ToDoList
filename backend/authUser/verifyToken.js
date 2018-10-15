@@ -9,21 +9,21 @@ module.exports =
         bearerHead = bearerHead.split(' ')
         //grab token from array 
         token = bearerHead[1];
-        console.log(token)
+
         if (!token) {
-            console.log("no token")
             return res.status(403).json({ "auth": false, "message": "no token provided" });
         } else {
-            console.log("got this far");
+            //pass jwt token to verify function to be decoded 
             jwt.verify(token, config.secret, (err, decoded) => {
-                console.log(">>>>>>>>>>>>>>>>")
+                
                 if (err) {
-                    console.log(err);
+                    
                     return res.status(500).json({ "auth": false, "message": "failed to authenticate token" });
                 } else {
                     console.log(decoded)
                 }
                 req.userID = decoded.userID;
+                //call next middleware
                 next();
             });
         }
