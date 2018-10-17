@@ -1,8 +1,9 @@
 import React, { Component } from '../node_modules/react';
 import './App.css';
 import './classes/logIn.js'
-import LogIn from './classes/logIn.js';
-import {Router, Route} from 'react-router';
+import NavBar from './classes/navBar';
+import Footer from  './classes/footer';
+import Main from './classes/main'
 
 class App extends Component {
   constructor() {
@@ -13,24 +14,14 @@ class App extends Component {
       data: []
     };
   }
-
-  // componentDidMount(id) {
-  //   fetch(`/user/${id}`)
-  //   .then(results => {
-  //     return results.json();
-  //   })
-  //   .then(res => {
-  //     this.setState({data:res})
-  //     console.dir(this.state.data);
-  //   })
-
-  //   }
   
   render() {
     
       return (
         <div className="App">
-          <LogIn />
+          <NavBar />
+          <Main />
+          <Footer />
         </div>
       );
   }

@@ -15,13 +15,16 @@ class LogIn extends Component{
         });
     }
     handleSubmit = event => {
+        
         event.preventDefault();
         axios.post('/verify',{
-            email: this.state.email,
-            password: this.state.password
+            "email": this.state.email,
+            "password": this.state.password
         })
         .then((res)=>{
-            console.log(res);
+            console.log("1",res);
+            console.log("token-", res.data.token)
+            
         })
         .catch((err)=>{
             console.log(err);
