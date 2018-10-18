@@ -9,7 +9,6 @@ module.exports =
         bearerHead = bearerHead.split(' ')
         //grab token from array 
         token = bearerHead[1];
-
         if (!token) {
             return res.status(403).json({ "auth": false, "message": "no token provided" });
         } else {

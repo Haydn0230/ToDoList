@@ -10,7 +10,7 @@ router = (app) => {
     // <<< Users >>>
     app.route('/addUser')
     .post((req,res,next) =>myControllersUser.addUser(req,res,next));
-
+    console.log("router working");
     app.route('/verify')
     .post((req,res,next)=> myControllersUser.postUser(req,res,next));
     
