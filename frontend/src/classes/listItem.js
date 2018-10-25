@@ -1,4 +1,5 @@
-import React, { Component } from '../node_modules/react';
+import React, { Component } from 'react';
+//import axios from 'axios';
 
 class ListItem extends Component {
     constructor() {
@@ -8,11 +9,13 @@ class ListItem extends Component {
 
     render() {
         return (
-            <li>
                 <div className="listItem">
-                    
+                    <ul>
+                        <li>List Item 1 </li>
+                    </ul>
                 </div>
-            </li>
         )
     }
 }
+
+export default ListItem;

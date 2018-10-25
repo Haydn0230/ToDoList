@@ -1,5 +1,9 @@
 import React, { Component } from '../../node_modules/react';
 import axios from 'axios';
+import setUserId from '../actions'
+import store from '../store'
+import {Redirect} from 'react-router-dom'
+//import {Cookies} from 'react-cookie';
 
 class LogIn extends Component{
     constructor() {
@@ -9,22 +13,32 @@ class LogIn extends Component{
             password:""
         };
     }
+
+    
+
     handleChange = event => {
         this.setState({
             [event.target.id]:event.target.value
         });
     }
     handleSubmit = event => {
-        
+        const {cookies} = this.props;
         event.preventDefault();
         axios.post('/verify',{
             "email": this.state.email,
             "password": this.state.password
         })
         .then((res)=>{
-            console.log("1",res);
-            console.log("token-", res.data.token)
-            
+
+            cookies.set('token', res.data.token, {
+                maxAge:3600,
+                path:'/'
+            });
+            const userId = res.data.userId;
+            store.dispatch(setUserId(userId));
+
+            //<Redirect to={{pathname:"/Project", state:""}} push/>
+    
         })
         .catch((err)=>{
             console.log(err);
