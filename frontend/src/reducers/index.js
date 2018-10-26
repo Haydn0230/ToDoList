@@ -10,6 +10,16 @@ export default (state, action) => {
                 ...state,
                 userId:action.userId
             };
+        case "SET_COOKIES":
+            return {
+                ...state,
+                cookies:action.cookies
+            };
+        case "SET_NAVIGATION":
+            return {
+                ...state,
+                navigation:action.cookies
+            }
         default:
             return state;
     }

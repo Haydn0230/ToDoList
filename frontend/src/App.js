@@ -20,22 +20,30 @@ class App extends Component {
   
 
   render() {
-    console.log(this.props)
+    console.log("app -- ",this.props)
       return (
         <div className="App">
-          <NavBar navigation ={this.props}/>
-          <Main navigation ={this.props}/>
+          <NavBar {...this.props} />
+          <Main {...this.props}/>
           <Footer />
         </div>
       );
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, ownProps ) => {
   return ({
-      state: state,
-      cookies: ownProps.cookies,
+    userId: state.userId,
+    projectId:state.projectId,
+    cookies:state.cookies,
+    navigation: ownProps.history
   });
 };
+
+const mapDispatchToProps =(dispatch) => {
+  return {
+    deleteUserSession:(userId) => {dispatch({type:'DELETE_POST', userId:userId})}
+  }
+}
 //export default  (App)
-export default withRouter(connect(mapStateToProps)(App))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

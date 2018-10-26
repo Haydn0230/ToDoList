@@ -3,24 +3,34 @@ import { Switch, Route } from 'react-router-dom'
 import Project from './project'
 import LogIn from './logIn'
 import Home from './home'
+// import ProtectedRoute from '../utils'
 
 import '../styles/main.css'
-// import { STATES } from 'mongoose';
-import {withCookies} from 'react-cookie';
+
 
 class Main extends Component {
+    protectedRoute = (TagName) => {
+        
+        return (
+            !this.props.userId ?
+                <Route path='/login' render={() => (<LogIn {...this.props} />)} />
+                :
+                <Route path={'/' + TagName} render={() => (
+                    <TagName {...this.props} />
+                )} />
+        )
+    }
     render() {
-        console.log("main been called", this.props)
+        
         return (
             <main>
-                
                 <Switch>
-                    {/* <Route path='/Home' Component={Home} />
-                    <Route path='/Login' Component={LogIn} />
-                    <Route path='/Project' Component={Project} /> */}
-                    <Route path='/Home' render={() => (<Home cookies={this.props.cookies} />)} /> 
-                    <Route path='/Project' render={() => (<Project cookies={this.props.cookies} />)} />
-                    <Route path='/login' render={() => (<LogIn cookies={this.props.cookies} />)} /> 
+                    {this.protectedRoute(Home)}
+                    {/* <Route path='/Home' render={() => (<Home {...this.props} />)} /> */}
+                    {/* <Route path='/Project' render={() => (<Project {...this.props} />)} /> */}
+                    {/* <Route path='/login' render={() => (<LogIn {...this.props} />)} /> */}
+                    {this.protectedRoute('LogIn')}
+                    {this.protectedRoute('Project')}
                 </Switch>
             </main>
         )
@@ -29,4 +39,4 @@ class Main extends Component {
 
 
 
-export default withCookies(Main)
+export default Main

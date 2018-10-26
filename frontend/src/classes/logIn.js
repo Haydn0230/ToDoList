@@ -1,16 +1,16 @@
 import React, { Component } from '../../node_modules/react';
 import axios from 'axios';
-import setUserId from '../actions'
+import {setUserId, setCookies} from '../actions'
 import store from '../store'
 import {Redirect} from 'react-router-dom'
-//import {Cookies} from 'react-cookie';
+//import cookie from 'react-cookie';
 
 class LogIn extends Component{
     constructor() {
         super();
         this.state={
-            email:"",
-            password:""
+            email:'',
+            password:''
         };
     }
 
@@ -22,22 +22,23 @@ class LogIn extends Component{
         });
     }
     handleSubmit = event => {
-        const {cookies} = this.props;
+         //const {cookies} = this.props.cookies.cookies;
+        //console.log("LOGIN",cookie)
         event.preventDefault();
         axios.post('/verify',{
             "email": this.state.email,
             "password": this.state.password
         })
         .then((res)=>{
-
-            cookies.set('token', res.data.token, {
-                maxAge:3600,
-                path:'/'
-            });
-            const userId = res.data.userId;
-            store.dispatch(setUserId(userId));
-
-            //<Redirect to={{pathname:"/Project", state:""}} push/>
+            store.dispatch(setCookies(res.data.token))
+            // cookie.set('token', res.data.token, {
+            //     maxAge:3600,
+            //     path:'/'
+            // });
+            
+            store.dispatch(setUserId(res.data.userId));
+            //console.log("---------",this.props.cookies.navigation)
+            this.props.history.push('/Project');
     
         })
         .catch((err)=>{

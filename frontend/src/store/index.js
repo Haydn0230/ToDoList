@@ -8,7 +8,9 @@ window.devToolsExtension ? window.devToolsExtension() : f => f
 
 const intialState ={
     userId:"",
-    projectId:""
+    projectId:"",
+    cookies:[],
+    navigation:[]
 };
 const store = createStore(reducer, intialState, enhancers);
 

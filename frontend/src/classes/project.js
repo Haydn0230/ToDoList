@@ -15,9 +15,10 @@ class Project extends Component {
 
 
     getProjects() {
-        const {cookies} = this.props;
+        //const {cookies} = this.props.cookies;
+        console.log("projects -- ",this.props)
         var config = {
-            "headers": { 'Authorization': 'bearer ' + cookies.get('token')}
+            "headers": { 'Authorization': 'bearer ' + store.getState().cookies}
         }
         
         
@@ -27,7 +28,7 @@ class Project extends Component {
                     projects:res.data,
                     isLoading:false
                 });
-               
+            
                 
             })
             .catch((err) => {
@@ -40,18 +41,19 @@ class Project extends Component {
         this.getProjects();
     }
 
+    handleClick = event => {
+        this.props.history.push('/ProjectView', event.target.id)
+    }
+
     render() {
         const {isLoading, projects} = this.state;
-        console.log("1")
-        console.log(projects, isLoading)
-        
         return (
             <div className='project-grid'>
                 {!isLoading ? (
                     projects.map(project => {
                         const {projectTitle, projectCompletionDate} = project
                         return (
-                            <div className='project' key={projectTitle}>
+                            <div className='project' key={projectTitle} onClick={this.handleClick}>
                                 <div className='project-title'>
                                     <p>{projectTitle}</p>
                                 </div>

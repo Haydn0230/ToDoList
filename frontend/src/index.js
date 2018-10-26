@@ -5,16 +5,13 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { CookiesProvider } from 'react-cookie';
 import store from './store'
 
 ReactDOM.render(
-    <CookiesProvider>
         <BrowserRouter>
             <Provider store={store}>
                 <App />
             </Provider>
-        </BrowserRouter>
-    </CookiesProvider>,
+        </BrowserRouter>,
     document.getElementById('root'));
 registerServiceWorker();
