@@ -20,6 +20,11 @@ export default (state, action) => {
                 ...state,
                 navigation:action.cookies
             }
+        case "SET_AUTHENTICATION":
+            return {
+                ...state,
+                isAuth:action.isAuth
+            }
         default:
             return state;
     }

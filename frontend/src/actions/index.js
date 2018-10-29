@@ -18,3 +18,9 @@ export function setNavigation(navigation) {
         navigation:navigation
     }
 };
+export function setAuth(isAuth) {
+    return {
+        type:"SET_AUTHENTICATION",
+        isAuth:isAuth
+    }
+}

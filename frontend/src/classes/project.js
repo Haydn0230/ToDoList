@@ -16,7 +16,6 @@ class Project extends Component {
 
     getProjects() {
         //const {cookies} = this.props.cookies;
-        console.log("projects -- ",this.props)
         var config = {
             "headers": { 'Authorization': 'bearer ' + store.getState().cookies}
         }
@@ -51,15 +50,16 @@ class Project extends Component {
             <div className='project-grid'>
                 {!isLoading ? (
                     projects.map(project => {
-                        const {projectTitle, projectCompletionDate} = project
+                        const {_id,projectTitle, projectCompletionDate} = project
                         return (
-                            <div className='project' key={projectTitle} onClick={this.handleClick}>
+                            <div className='project' id={_id} key={projectTitle} onClick={this.handleClick}>
                                 <div className='project-title'>
                                     <p>{projectTitle}</p>
                                 </div>
                                 <div className='project-body'>
                                     <p>{projectCompletionDate}</p>
                                 </div>
+                                <button onClick={this.handleClick} id={_id}>View Project</button>
 
                             </div>
                         )

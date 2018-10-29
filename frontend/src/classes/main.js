@@ -3,35 +3,31 @@ import { Switch, Route } from 'react-router-dom'
 import Project from './project'
 import LogIn from './logIn'
 import Home from './home'
-// import ProtectedRoute from '../utils'
+import ProjectList from './projectList'
+
 
 import '../styles/main.css'
 
 
 class Main extends Component {
-    protectedRoute = (TagName) => {
-        
-        return (
-            !this.props.userId ?
-                <Route path='/login' render={() => (<LogIn {...this.props} />)} />
-                :
-                <Route path={'/' + TagName} render={() => (
-                    <TagName {...this.props} />
-                )} />
-        )
-    }
+
     render() {
-        
+        const isAuth = this.props.isAuth;
         return (
             <main>
-                <Switch>
-                    {this.protectedRoute(Home)}
-                    {/* <Route path='/Home' render={() => (<Home {...this.props} />)} /> */}
-                    {/* <Route path='/Project' render={() => (<Project {...this.props} />)} /> */}
-                    {/* <Route path='/login' render={() => (<LogIn {...this.props} />)} /> */}
-                    {this.protectedRoute('LogIn')}
-                    {this.protectedRoute('Project')}
-                </Switch>
+                    {isAuth ? (
+                    <Switch>
+                        <Route path='/Home' render={() => (<Home {...this.props} />)} />
+                        <Route path='/Project' render={() => (<Project {...this.props} />)} />
+                        <Route path='/ProjectView' render={() =>(<ProjectList {...this.props}/>)}/>
+                    </Switch>
+                    ) : (
+                    <Switch>
+                        <Route path='/Home' render={() => (<Home {...this.props} />)} />
+                        <Route path='/Login' render={() => (<LogIn {...this.props} />)} />
+                    </Switch>
+                    )
+                    }
             </main>
         )
     }

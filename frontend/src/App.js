@@ -20,7 +20,6 @@ class App extends Component {
   
 
   render() {
-    console.log("app -- ",this.props)
       return (
         <div className="App">
           <NavBar {...this.props} />
@@ -35,6 +34,7 @@ const mapStateToProps = (state, ownProps ) => {
   return ({
     userId: state.userId,
     projectId:state.projectId,
+    isAuth:state.isAuth,
     cookies:state.cookies,
     navigation: ownProps.history
   });

@@ -1,8 +1,8 @@
 import React, { Component } from '../../node_modules/react';
 import axios from 'axios';
-import {setUserId, setCookies} from '../actions'
+import {setUserId, setCookies, setAuth} from '../actions'
 import store from '../store'
-import {Redirect} from 'react-router-dom'
+//import {Redirect} from 'react-router-dom'
 //import cookie from 'react-cookie';
 
 class LogIn extends Component{
@@ -37,6 +37,7 @@ class LogIn extends Component{
             // });
             
             store.dispatch(setUserId(res.data.userId));
+            store.dispatch(setAuth(true));
             //console.log("---------",this.props.cookies.navigation)
             this.props.history.push('/Project');
     

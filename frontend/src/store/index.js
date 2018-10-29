@@ -9,6 +9,7 @@ window.devToolsExtension ? window.devToolsExtension() : f => f
 const intialState ={
     userId:"",
     projectId:"",
+    isAuth:false,
     cookies:[],
     navigation:[]
 };
