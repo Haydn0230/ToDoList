@@ -1,6 +1,7 @@
 import reducer from '../reducers'
-import {createStore} from 'redux'
-import {compose} from 'redux'
+import {createStore, compose} from 'redux'
+
+
 
 const enhancers = compose(
 window.devToolsExtension ? window.devToolsExtension() : f => f
@@ -11,8 +12,11 @@ const intialState ={
     projectId:"",
     isAuth:false,
     cookies:[],
-    navigation:[]
+    navigation:[],
+    projectAll:[],
+    projectOne:[],
+    isLoadingProject:true
 };
-const store = createStore(reducer, intialState, enhancers);
+const store = createStore(reducer, intialState,  enhancers);
 
 export default store;

@@ -6,8 +6,9 @@ class ProjectAdd extends Component {
     constructor() {
         super()
         this.state = {
-            email: '',
-            password: '',
+            projectTitle: '',
+            projectOwner: '',
+            projectCompletionDate:'',
             isAdded:false
 
         }
@@ -19,13 +20,19 @@ class ProjectAdd extends Component {
     }
 
     handleSubmit = event => {
+        var config = {
+            "headers": { 'Authorization': 'bearer ' + store.getState().cookies }
+        }
         event.preventDefault();
-        axios.post('/', {
-            'email': this.state.email,
-            'password': this.state.password
-        })
+        axios.post('/addProject',  {
+            projectTitle: this.state.projectTitle,
+            projectOwner: store.getState().userId,
+            projectCompletionDate:this.state.projectCompletionDate,
+        },config)
         .then((res)=>{
-
+            this.setState({
+                isAdded:true
+            })
         })
         .catch((err)=>{
 
@@ -38,11 +45,11 @@ class ProjectAdd extends Component {
             <div>
                 {!isAdded ? (
                 <form>
-                    <label htmlFor="userName" />
-                    <input type='text' id='email' name='email' onChange={this.handleChange} />
-                    <label htmlFor='password' />
-                    <input type='password' id='password' name='password' onChange={this.handleChange} />
-                    <button onClick={this.handleSubmit} type='button'>Log In</button>
+                    <label htmlFor="projectTitle" > project Title </label>
+                    <input type='text' id='projectTitle' name='projectTitle' onChange={this.handleChange} />
+                    <label htmlFor='projectCompletionDate' />
+                    <input type='password' id='projectCompletionDate' name='projectCompletionDate' onChange={this.handleChange} />
+                    <button onClick={this.handleSubmit} type='button'>Save</button>
                 </form>
                 ):(
                    <p>Added</p> 

@@ -1,21 +1,29 @@
 import React, {Component} from 'react'
-import axios from 'axios'
 
 class ProjectUser extends Component {
     constructor() {
         super()
         this.state={
-            ProjectUser =[],
-            isLoading=true
-        }
+}
     }
     
-    componentDidMount() {
 
-    }
         render() {
+            const {userAccess} =this.props
             return (
-                <div> </div>
+                <div>
+                    {userAccess.map(Users => {
+                        const {firstName, lastName} = Users
+                        return (
+                            <div key={firstName}>
+                                <p>{firstName}</p>
+                                <p>{lastName}</p>
+                            </div>
+                        )
+                    })}
+                 </div>
             )
         }
     }
+
+export default ProjectUser

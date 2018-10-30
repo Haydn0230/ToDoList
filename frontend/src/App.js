@@ -33,6 +33,7 @@ class App extends Component {
 const mapStateToProps = (state, ownProps ) => {
   return ({
     userId: state.userId,
+    projects:state.projects,
     projectId:state.projectId,
     isAuth:state.isAuth,
     cookies:state.cookies,
