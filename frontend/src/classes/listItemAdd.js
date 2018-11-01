@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import store from '../store'
 import { connect } from 'react-redux'
+import project from './project';
 
 class ListItemAdd extends Component {
     constructor() {
@@ -29,22 +30,34 @@ class ListItemAdd extends Component {
         }
 
         const data = {
-            "listItem": {
+            
                 listOwnership: 'dummy setting',
                 listTitle: this.state.listTitle,
                 listItem: this.state.listItem,
+                listItemCompleted:false,
                 listDateCompletion: this.state.listDateCompletion
-            }
+            
         }
 
-        axios.put('/addList/' + this.props.projectId, data, config)
+
+        let projectOneNew = this.props.projectOne
+        
+        projectOneNew[0].listItem.push(data)
+        
+        //  projectOneNew = projectOneNew
+        
+        console.log("PROJECT ONE NEW ", projectOneNew, " SOMETHING KNEW ", data  )
+        this.props.updateProjectOne(projectOneNew);
+        console.log("2", this.props.projectOne)
+
+        axios.put('/addList/' + this.props.projectOne[0]._id, {'listItem':data}, config)
             .then((res) => {
-                console.log("props",this.props);
-                this.props.addListItem(data);
+                // console.log("props",this.props);
+
                 // this.setState({
                 //     isAdded: true
                 // })
-                //this.props.getProjectItem()
+                // this.props.getProjectItem()
             })
             .catch((err) => {
                 console.log(err)
@@ -52,8 +65,7 @@ class ListItemAdd extends Component {
     }
 
     render() {
-        const { isAdded } = this.state;
-        console.log("99-----", store.getState().projectId)
+        console.log("list Item Add Called")
         return (
             <div>
                 <form>
@@ -74,15 +86,16 @@ class ListItemAdd extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addListItem: (listItem) => { dispatch({ type: 'ADD_LIST_ITEM', listItem }) }
+        updateProjectOne: (projectOne) => { dispatch({ type: 'UPDATE_PROJECT_ONE', projectOne }) }
     }
 }
 
 const mapStateToProps = (state ) => {
     return ({
         cookies:state.cookies,
-      projectId: state.projectId,
-      isLoading:state.isLoading
+        projectOne:state.projectOne,
+        projectId: state.projectId,
+        isLoading:state.isLoading
     });
   };
 export default connect(mapStateToProps,mapDispatchToProps)(ListItemAdd)

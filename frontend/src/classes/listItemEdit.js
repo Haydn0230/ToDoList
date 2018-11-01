@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import store from '../store'
+import {connect} from 'react-redux'
 
 class ListItemEdit extends Component {
 
@@ -22,22 +23,40 @@ class ListItemEdit extends Component {
         });
     }
 
-    handleSubmit = event => {
-        event.preventDefault();
+    handleSubmit = (e) => {
+        e.preventDefault();
 
         var config = {
-            "headers": { 'Authorization': 'bearer ' + store.getState().cookies }
-        }
-        console.log("State", this.state, "projectID", store.getState().projectId, "ListItemID", this.props.listItem._id)
-        axios.put('/editList/' + store.getState().projectId, {
-            "listItem": {
+            "headers": { 'Authorization': 'bearer ' + this.props.cookies }
+            }
+            console.log(this.props.cookies)
+        let data ={
                 _id: this.props.listItem._id,
                 listOwnership: '',
                 listTitle: this.state.listTitle,
                 listItem: this.state.listItem,
                 listDateCompletion: this.state.listDateCompletion
+        }
+        
+        //1)loops through all list items finds the corresponding ID 
+        // then overwrites the listitem object with both unchanged and changed listitems
+        let newListItems  = this.props.projectOne[0].listItem.filter((listItem) => {
+            if (this.props.listItem._id === listItem._id) {
+                listItem = Object.assign(listItem,data) 
+                console.log("filtered list item",listItem)
             }
-        }, config)
+            return listItem
+        })
+
+        // push the newlistitem onto the project
+        let projectOneNew = this.props.projectOne
+        projectOneNew[0].listItem.push(newListItems)
+
+        //update the store with the new project info 
+        this.props.updateProjectOne(projectOneNew)
+
+        //send new project object with new list item to server 
+        axios.put('/editList/' + this.props.projectOne[0]._id, {'listItem':data}, config)
             .then((res) => {
                 console.log(res)
                 this.setState({
@@ -50,7 +69,7 @@ class ListItemEdit extends Component {
     }
 
     render() {
-        const { listTitle, listItem, listDateCompletion } = this.props.listItem
+        const { listTitle, listItem, listDateCompletion, _id} = this.props.listItem
         const { isEdited } = this.state;
         return (
             <div>
@@ -64,7 +83,7 @@ class ListItemEdit extends Component {
 
                         <label htmlFor='listDateCompletion'> Date for Completion</label>
                         <input type='date' id='listDateCompletion' name='listDateCompletion' placeholder={listDateCompletion} onChange={this.handleChange} />
-                        <button onClick={this.handleSubmit} type='button'>Save</button>
+                        <button onClick={this.handleSubmit} id={_id} type='button'>Save</button>
                     </form>
                 ) : (
                         <p>Changes have been made</p>
@@ -75,4 +94,16 @@ class ListItemEdit extends Component {
     }
 }
 
-export default ListItemEdit
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateProjectOne: (projectOne) => { dispatch({ type: 'UPDATE_PROJECT_ONE', projectOne }) }
+    }
+}
+
+const mapStateToProps = (state ) => {
+    return ({
+      cookies:state.cookies,
+      projectOne:state.projectOne,
+    });
+  };
+export default connect(mapStateToProps,mapDispatchToProps)(ListItemEdit)

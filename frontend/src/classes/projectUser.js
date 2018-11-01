@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-
+import {connect} from 'react-redux'
 class ProjectUser extends Component {
     constructor() {
         super()
@@ -9,7 +9,8 @@ class ProjectUser extends Component {
     
 
         render() {
-            const {userAccess} =this.props
+            console.log("Project User Called")
+            const {userAccess} =this.props.projectOne[0]
             return (
                 <div>
                     {userAccess.map(Users => {
@@ -25,5 +26,15 @@ class ProjectUser extends Component {
             )
         }
     }
-
-export default ProjectUser
+    const mapDispatchToProps = (dispatch) => {
+        return {
+        }
+    }
+    
+    const mapStateToProps = (state ) => {
+        return ({
+          cookies:state.cookies,
+          projectOne:state.projectOne,
+        });
+      };
+export default connect(mapStateToProps)(ProjectUser)

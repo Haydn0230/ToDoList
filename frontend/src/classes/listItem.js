@@ -4,42 +4,15 @@ import store from '../store'
 import ListItemEdit from './listItemEdit'
 import ListItemAdd from './listItemAdd'
 import ListItemDelete from './listItemDelete'
-
+import {connect} from 'react-redux'
 class ListItem extends Component {
-    constructor() {
-        super();
-        this.state = {
-            listItem: [],
-            isLoading: true
-        };
-    }
 
-    // getListItem() {
-    //     var config = {
-    //         "headers": { 'Authorization': 'bearer ' + store.getState().cookies}
-    //     }
-    //     axios.get('/Project/' + this.props.projectId ,config)
-    //     .then((res)=>{
-    //         this.setState({
-    //             listItem:res.data.listItem,
-    //             isLoading:false
-    //         })
-    //         console.log("RES",res.data.listItem)
-    //     })
-    //     .catch((err)=>{
-    //         console.log(err);
-    //     })
-    // }
-
-    // componentDidMount() {
-    //     this.getListItem();
-    // }
     render() {
-        const { listItems } = this.props
-        
+        console.log("List Item Called", this.props)
+        const { listItem } = this.props.projectOne[0]
         return (
             <div className="listItem">
-                {listItems.map(listItem => {
+                {listItem.map(listItem => {
                     const { listTitle,_id } = listItem
                     return (
                         <div>
@@ -47,13 +20,13 @@ class ListItem extends Component {
                                 {listTitle}
                             </div>
                             <div key={_id}>
-                                <ListItemEdit listItem={listItem} getProjectItem={this.props.getProjectItem} />
+                                <ListItemEdit listItem={listItem} />
                                 <ListItemDelete listItemId={_id} />
                             </div>
                         </div>
                     )
                 })}
-                <ListItemAdd project={this.props} getProjectItem={this.props.getProjectItem} />
+                <ListItemAdd   />
                 <ul>
                     <li>List Item 1 </li>
                 </ul>
@@ -61,5 +34,16 @@ class ListItem extends Component {
         )
     }
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+    }
+}
 
-export default ListItem;
+const mapStateToProps = (state ) => {
+    return ({
+      cookies:state.cookies,
+      projectOne:state.projectOne,
+      state:state
+    });
+  };
+export default connect(mapStateToProps,mapDispatchToProps)(ListItem);

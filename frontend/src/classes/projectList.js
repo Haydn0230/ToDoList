@@ -38,24 +38,24 @@ class ProjectList extends Component {
     }
 
     componentDidMount() {
-        store.dispatch(setProjectId(this.props.history.location.state))
-        this.getProjectItem();
+        // store.dispatch(setProjectId(this.props.history.location.state))
+        // this.getProjectItem();
     }
     render() {
-        console.log("HISTORY__",  store.getState().cookies)
-        const { isLoading, project } = this.props
+        console.log("Project List Called", this.props )
+        const { isLoading, projectOne } = this.props
         return (
             <div>
                     <div>
                         <div>
 
                             <div>
-                                <h1>{project.projectTitle}</h1>
-                                <h3>{project.projectCompletionDate}</h3>
+                                <h1>{projectOne.projectTitle}</h1>
+                                <h3>{projectOne.projectCompletionDate}</h3>
                             </div>
 
                             <div>
-                                <ListItem listItems={project.listItem} getProjectItem={this.getProjectItem} />
+                                <ListItem  />
                                 {/* <ListItem listItems={this.props.history.location.state}/> */}
                             </div>
                         </div>
@@ -63,7 +63,7 @@ class ProjectList extends Component {
                         <div>
 
                             <div>
-                                <ProjectUser proke userAccess={project.userAccess}/>
+                                <ProjectUser proke userAccess={projectOne.userAccess}/>
                             </div>
 
                            
@@ -75,9 +75,7 @@ class ProjectList extends Component {
 }
 const mapStateToProps = (state ) => {
     return ({
-      project:state.project,
-      projectId: state.projectId,
-      isLoading:state.isLoading
+      projectOne:state.projectOne,
     });
   };
   

@@ -40,6 +40,7 @@ class ProjectAdd extends Component {
     }
 
     render() {
+        console.log("Project Add called")
         const {isAdded} = this.state;
         return (
             <div>

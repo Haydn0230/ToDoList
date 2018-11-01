@@ -36,17 +36,18 @@ class Project extends Component {
     }
 
     componentDidMount() {
-       
+       //when component mounts then call fnction to load projects
         this.getProjects();
     }
 
-    handleClick = (e,_id) => {
-        //this.props.setProject(_id)
+    handleClick = (e) => {
+        //console.log("ID FROM HANDLE CLICK", e.target.id)
+        this.props.setProject(e.target.id)
         this.props.history.push('/ProjectView');
     }
 
     render() {
-        console.log("this.props", this.props)
+        console.log("project called")
         const {isLoadingProject, projectAll} = this.props;
         return (
             <div className='project-grid'>
@@ -61,7 +62,8 @@ class Project extends Component {
                                 <div className='project-body'>
                                     <p>{projectCompletionDate}</p>
                                 </div>
-                                <button onClick={(e) => this.handleClick(e, _id)} id={_id}>View Project</button>
+                                {/* <button onClick={(e) => this.handleClick(e, _id)} id={_id}>View Project</button> */}
+                                <button onClick={this.handleClick} id={_id}>View Project</button>
 
                             </div>
 
@@ -81,7 +83,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         addProjectAll: (projectAll) => {dispatch({ type: 'SET_PROJECT_ALL', projectAll }) },
         setLoading:(isLoadingProject) => {dispatch({type:'SET_LOADING',isLoadingProject })},
-        //setProject:(projectId) => {dispatch({type:'SET_PROJECT_ONE',projectId})}
+        setProject:(projectId) => {dispatch({type:'SET_PROJECT_ONE',projectId})}
     }
 }
 
@@ -91,7 +93,8 @@ const mapStateToProps = (state ) => {
       projectAll:state.projectAll,
       projectOne:state.projectOne,
       projectId: state.projectId,
-      isLoading:state.isLoading
+      isLoading:state.isLoading,
+      state:state
     });
   };
 
