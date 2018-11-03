@@ -1,6 +1,6 @@
-import React from 'react'
-import axios from 'axios'
-
+import React, {Component} from 'react';
+import axios from 'axios';
+import {connect} from 'react-redux';
 
 class ProjectAdd extends Component {
     constructor() {
@@ -19,24 +19,36 @@ class ProjectAdd extends Component {
         });
     }
 
-    handleSubmit = event => {
+    handleSubmit = e => {
+        e.preventDefault();
+        //verification needed for date 
         var config = {
-            "headers": { 'Authorization': 'bearer ' + store.getState().cookies }
+            "headers": { 'Authorization': 'bearer ' + this.props.cookies }
         }
-        event.preventDefault();
-        axios.post('/addProject',  {
+        
+        let data ={ 
             projectTitle: this.state.projectTitle,
-            projectOwner: store.getState().userId,
+            projectOwner: this.props.userId,
             projectCompletionDate:this.state.projectCompletionDate,
-        },config)
+            userAccess: {
+                userID: this.props.userId,
+                firstName:this.props.user.firstName,
+                LastName:this.props.user.lastName
+            }
+        }
+        console.log("Project Add", data)
+        axios.post('/addProject', data,config)
         .then((res)=>{
             this.setState({
                 isAdded:true
             })
+            
+            this.props.history.push('/Project');
         })
         .catch((err)=>{
 
         })
+
     }
 
     render() {
@@ -44,21 +56,30 @@ class ProjectAdd extends Component {
         const {isAdded} = this.state;
         return (
             <div>
+                <h1>PROJECT ADD </h1>
                 {!isAdded ? (
                 <form>
                     <label htmlFor="projectTitle" > project Title </label>
                     <input type='text' id='projectTitle' name='projectTitle' onChange={this.handleChange} />
                     <label htmlFor='projectCompletionDate' />
-                    <input type='password' id='projectCompletionDate' name='projectCompletionDate' onChange={this.handleChange} />
+                    <input type='date' id='projectCompletionDate' name='projectCompletionDate' onChange={this.handleChange} />
                     <button onClick={this.handleSubmit} type='button'>Save</button>
                 </form>
                 ):(
-                   <p>Added</p> 
+                   <p> ADDED </p>
                 )}
 
             </div>
         )
     }
 }
-
-export default ProjectAdd
+const mapStateToProps = (state) => {
+    return ({
+        userId:state.userId,
+        user:state.user,
+        cookies: state.cookies,
+        projectOne: state.projectOne,
+        state: state
+    });
+};
+export default connect(mapStateToProps)(ProjectAdd)

@@ -4,32 +4,41 @@ import store from '../store'
 import ListItemEdit from './listItemEdit'
 import ListItemAdd from './listItemAdd'
 import ListItemDelete from './listItemDelete'
-import {connect} from 'react-redux'
+import CheckBox from './listItemCheckbox'
+import { connect } from 'react-redux'
+
 class ListItem extends Component {
 
     render() {
-        console.log("List Item Called", this.props)
+
+        console.log("List Item Called 2 ", this.props.projectOne[0])
         const { listItem } = this.props.projectOne[0]
         return (
-            <div className="listItem">
-                {listItem.map(listItem => {
-                    const { listTitle,_id } = listItem
+            <div className="listItem-grid">
+                {listItem.map(ListItem => {
+                    const { listTitle, _id, listItem, listDateCompletion, listItemCompleted
+                    } = ListItem
                     return (
-                        <div>
-                            <div key={listTitle}>
-                                {listTitle}
+                        <div className='listItem-container'>
+                            <div className ='listBox'key={listTitle}>
+                            <ul className ='listBox-ul'>
+                                <li>{listTitle}</li>
+                                <li>{listItem}</li>
+                                <li>{listDateCompletion}</li>
+                                <li className='checkBox'><CheckBox id={_id} value={listItemCompleted}/></li>
+                                <li><ListItemDelete listItemId={_id} /></li>
+                            </ul>
                             </div>
-                            <div key={_id}>
-                                <ListItemEdit listItem={listItem} />
-                                <ListItemDelete listItemId={_id} />
+                            <div className='listFeatures' key={_id}>
+                                 <ListItemEdit listItem={ListItem} />
                             </div>
                         </div>
                     )
                 })}
-                <ListItemAdd   />
-                <ul>
-                    <li>List Item 1 </li>
-                </ul>
+                <div className='listAdd'>
+                    <ListItemAdd />
+                </div>
+
             </div>
         )
     }
@@ -39,11 +48,11 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const mapStateToProps = (state ) => {
+const mapStateToProps = (state) => {
     return ({
-      cookies:state.cookies,
-      projectOne:state.projectOne,
-      state:state
+        cookies: state.cookies,
+        projectOne: state.projectOne,
+        state: state
     });
-  };
-export default connect(mapStateToProps,mapDispatchToProps)(ListItem);
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ListItem);

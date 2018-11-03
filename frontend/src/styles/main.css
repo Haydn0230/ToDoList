@@ -19,4 +19,90 @@
 
 li {
     list-style: none;
+    display:inline;
+    padding:0% 5%;
+    text-decoration: none;
+}
+a{
+    text-decoration: none;
+}
+.navBar-ul{
+    margin-left:50%;
+}
+
+.listBox {
+
+    margin:5px;
+    border: 0.5px solid grey;
+    border-radius: 10px;
+    height: 40px;
+    padding:5px;
+    box-sizing: border-box;
+
+}
+.listBox-ul {
+    margin:0% 30% 0% 0%;
+    height: 75px;
+padding:0px; 
+text-align: left;
+height: 40px;
+    
+}
+.checkBox {
+    margin:0%;
+}
+.listBox-ul li {
+    padding-right: 5px;
+    padding-left: 0 px;
+}
+.listFeatures{
+    margin:0% 0% 0% 20%;
+    border: 0.7px solid black;
+    border-radius: 10px;
+    width:80%;
+    padding:5px;
+    box-sizing: border-box;
+    display:block;
+}
+.listItem-grid{
+    display:flex;
+    flex-wrap:wrap;
+    margin:auto;
+}
+h3 {
+    margin:0px;
+}
+
+.userContainer{
+    height: 10%;
+
+}
+.userCircle {
+    height: 100px; 
+    width:100px; 
+    background-color: aqua;
+    border-radius: 45px;
+}
+.App {
+    margin:auto;
+    height: 100%;
+}
+.listItem-container{
+    margin:auto;
+}
+
+.form-label {
+    margin: 0% 2% 0% 5%;
+}
+.Home {
+    height: 100%;
+}
+main {
+    height: 100%;
+}
+#root{
+    height:700px;
+}
+body{
+    height:100%;
 }

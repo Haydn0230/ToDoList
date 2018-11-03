@@ -12,11 +12,11 @@ class ProjectUser extends Component {
             console.log("Project User Called")
             const {userAccess} =this.props.projectOne[0]
             return (
-                <div>
+                <div className='userContainer'>
                     {userAccess.map(Users => {
                         const {firstName, lastName} = Users
                         return (
-                            <div key={firstName}>
+                            <div className='userCircle' key={firstName}>
                                 <p>{firstName}</p>
                                 <p>{lastName}</p>
                             </div>

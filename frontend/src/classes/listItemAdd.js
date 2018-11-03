@@ -12,6 +12,8 @@ class ListItemAdd extends Component {
             listTitle: '',
             listItem: '',
             listDateCompletion: '',
+            reRender:false
+
         }
     }
     handleChange = event => {
@@ -30,34 +32,24 @@ class ListItemAdd extends Component {
         }
 
         const data = {
-            
                 listOwnership: 'dummy setting',
                 listTitle: this.state.listTitle,
                 listItem: this.state.listItem,
                 listItemCompleted:false,
                 listDateCompletion: this.state.listDateCompletion
-            
         }
 
-
+        //duplicate projectOne
         let projectOneNew = this.props.projectOne
-        
-        projectOneNew[0].listItem.push(data)
-        
-        //  projectOneNew = projectOneNew
-        
-        console.log("PROJECT ONE NEW ", projectOneNew, " SOMETHING KNEW ", data  )
-        this.props.updateProjectOne(projectOneNew);
-        console.log("2", this.props.projectOne)
 
         axios.put('/addList/' + this.props.projectOne[0]._id, {'listItem':data}, config)
             .then((res) => {
-                // console.log("props",this.props);
 
-                // this.setState({
-                //     isAdded: true
-                // })
-                // this.props.getProjectItem()
+                 //assign new listitem array to projectOne.ListItem 
+                projectOneNew[0].listItem = res.data.listItem;
+                console.log("res.data.listItem",res.data.listItem)
+                //call reducer to update project in store
+                this.props.updateProjectOne(projectOneNew);
             })
             .catch((err) => {
                 console.log(err)
@@ -65,7 +57,6 @@ class ListItemAdd extends Component {
     }
 
     render() {
-        console.log("list Item Add Called")
         return (
             <div>
                 <form>

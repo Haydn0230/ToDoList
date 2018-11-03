@@ -2,6 +2,7 @@ import React, { Component } from '../../node_modules/react';
 import axios from 'axios';
 import {setUserId, setCookies, setAuth} from '../actions'
 import store from '../store'
+import {connect} from 'react-redux'
 //import {Redirect} from 'react-router-dom'
 //import cookie from 'react-cookie';
 
@@ -30,17 +31,12 @@ class LogIn extends Component{
             "password": this.state.password
         })
         .then((res)=>{
-            store.dispatch(setCookies(res.data.token))
-            // cookie.set('token', res.data.token, {
-            //     maxAge:3600,
-            //     path:'/'
-            // });
-            
-            store.dispatch(setUserId(res.data.userId));
-            store.dispatch(setAuth(true));
-            //console.log("---------",this.props.cookies.navigation)
+            this.props.setCookies(res.data.token)
+            this.props.setAuth(true)
+            this.props.setUserId(res.data.user._id)
+            this.props.setUser(res.data.user)
+           console.log("user -", res.data)
             this.props.history.push('/Project');
-    
         })
         .catch((err)=>{
             console.log(err);
@@ -61,5 +57,20 @@ class LogIn extends Component{
         )
     }
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setCookies: (cookies) => { dispatch({ type: 'SET_COOKIES', cookies }) },
+        setUserId: (userId) => { dispatch({ type: 'SET_USER_ID', userId }) },
+        setUser: (user) => { dispatch({ type: 'SET_USER', user }) },
+        setAuth: (isAuth) => { dispatch({ type: 'SET_AUTHENTICATION', isAuth }) }    }
+}
 
-export default LogIn;
+const mapStateToProps = (state) => {
+    return ({
+        user:state.user,
+        cookies: state.cookies,
+        projectOne: state.projectOne,
+        state: state
+    });
+}
+export default connect(mapStateToProps,mapDispatchToProps)(LogIn)

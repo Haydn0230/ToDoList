@@ -16,15 +16,19 @@ class NavBar extends Component {
         const isAuth = store.getState().isAuth
         return (
             <div className="navBar">
-                <ul>
+                <ul className ='navBar-ul'>
                     {isAuth ? (
                         <li>
                             <Link to='/Home'>
                                 <button onClick={this.LogOut}>Log Out</button>
                             </Link>
+
                         </li>
                     ) : (
+                        <React.Fragment>
                             <li><Link to='/login'>Log In</Link></li>
+                            <li><Link to='/SignUp'>Sign Up</Link></li>
+                        </React.Fragment>
                         )}
                     <li><Link to='/Home'>Home</Link></li>
                     <li><Link to='/Project'>Projects</Link></li>

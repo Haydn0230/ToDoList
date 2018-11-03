@@ -4,6 +4,7 @@ import axios from 'axios'
 import store from '../store'
 import {connect} from 'react-redux'
 import { setProjectId } from '../actions';
+
 class Project extends Component {
     constructor() {
         super();
@@ -36,7 +37,6 @@ class Project extends Component {
     }
 
     componentDidMount() {
-       //when component mounts then call fnction to load projects
         this.getProjects();
     }
 
@@ -44,6 +44,10 @@ class Project extends Component {
         //console.log("ID FROM HANDLE CLICK", e.target.id)
         this.props.setProject(e.target.id)
         this.props.history.push('/ProjectView');
+    }
+
+    newProjectClick = e =>{
+        this.props.history.push('/ProjectAdd');
     }
 
     render() {
@@ -73,7 +77,7 @@ class Project extends Component {
                     <p>Loading. . .</p>
                 )}
                 <div className = 'project'>
-                <button>+</button>
+                    <button onClick={this.newProjectClick}>+</button>
                 </div>
             </div>
         )

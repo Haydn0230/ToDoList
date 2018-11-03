@@ -12,6 +12,13 @@ export function setProjectId(projectId){
     }
 }
 
+export function setUser(user){
+    return {
+        type:"SET_USER",
+        user:user
+    }
+}
+
 export function setProject(projectAll) {
     console.log("ACTIONS PROJECT", projectAll)
     return {
@@ -19,7 +26,6 @@ export function setProject(projectAll) {
         projectAll:projectAll
     }
 }
-
 
 export function setCookies(cookies){
     return {

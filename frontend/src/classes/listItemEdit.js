@@ -29,7 +29,7 @@ class ListItemEdit extends Component {
         var config = {
             "headers": { 'Authorization': 'bearer ' + this.props.cookies }
             }
-            console.log(this.props.cookies)
+           
         let data ={
                 _id: this.props.listItem._id,
                 listOwnership: '',
@@ -37,20 +37,20 @@ class ListItemEdit extends Component {
                 listItem: this.state.listItem,
                 listDateCompletion: this.state.listDateCompletion
         }
-        
-        //1)loops through all list items finds the corresponding ID 
+
+        // loops through all list items finds the corresponding ID 
         // then overwrites the listitem object with both unchanged and changed listitems
         let newListItems  = this.props.projectOne[0].listItem.filter((listItem) => {
             if (this.props.listItem._id === listItem._id) {
+                //use assign as copies the elements rather than make reference to
                 listItem = Object.assign(listItem,data) 
-                console.log("filtered list item",listItem)
             }
             return listItem
         })
 
         // push the newlistitem onto the project
         let projectOneNew = this.props.projectOne
-        projectOneNew[0].listItem.push(newListItems)
+        projectOneNew[0].listItem = newListItems
 
         //update the store with the new project info 
         this.props.updateProjectOne(projectOneNew)
@@ -69,19 +69,20 @@ class ListItemEdit extends Component {
     }
 
     render() {
+        console.log("LIST ITEM ", this.props)
         const { listTitle, listItem, listDateCompletion, _id} = this.props.listItem
         const { isEdited } = this.state;
         return (
-            <div>
+            <React.Fragment>
                 {!isEdited ? (
                     <form>
-                        <label htmlFor='listTitle'>List Title</label>
+                        <label className='form-label'htmlFor='listTitle'>List Title</label>
                         <input type='text' id='listTitle' name='listTitle' placeholder={listTitle} onChange={this.handleChange} />
 
-                        <label htmlFor="listItem" >List Item</label>
+                        <label className='form-label'htmlFor="listItem" >List Item</label>
                         <input type='text' id='listItem' name='listItem' placeholder={listItem} onChange={this.handleChange} />
 
-                        <label htmlFor='listDateCompletion'> Date for Completion</label>
+                        <label className='form-label'htmlFor='listDateCompletion'> Date for Completion</label>
                         <input type='date' id='listDateCompletion' name='listDateCompletion' placeholder={listDateCompletion} onChange={this.handleChange} />
                         <button onClick={this.handleSubmit} id={_id} type='button'>Save</button>
                     </form>
@@ -89,7 +90,7 @@ class ListItemEdit extends Component {
                         <p>Changes have been made</p>
                     )}
 
-            </div>
+            </React.Fragment>
         )
     }
 }

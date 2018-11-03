@@ -2,31 +2,36 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import store from '../store'
 import { connect } from 'react-redux'
+
 class ListItemDelete extends Component {
 
     handleClick = () => {
-        this.props.deleteListItem(this.props.listItemId)
+        //this.props.deleteListItem(this.props.listItemId)
 
         var config = {
             "headers": { 'Authorization': 'bearer ' + this.props.cookies }
         }
 
-        let data = { 
+        let data = {
             'listItem':
             {
                 '_id': this.props.listItemId
             }
         }
-        //delete code from redux store code 
-        //let newListItems  = this.props.projectOne[0].listItem.filter(listItem => {
-        //     return action._id !== listItem._id
-        // });
 
+        //loop through listItems on ID to filter listItem 
+        let newListItems= this.props.projectOne[0].listItem.filter(listItem =>  this.props.listItemId !== listItem._id);
 
+        // push the newlistitem onto the project
+        let projectOneNew = this.props.projectOne
 
-        console.log("Project ID -", this.props.projectOne[0]._id, "DATA - ", data, "CONFIG - ", config)
+        //add new list item array
+        projectOneNew[0].listItem =newListItems
+        
+        //update the store with the new project info 
+        this.props.updateProjectOne(projectOneNew)
 
-        axios.put('/deleteList/' + this.props.projectOne[0]._id,  data, config)
+        axios.put('/deleteList/' + this.props.projectOne[0]._id, data, config)
             .then((res) => {
                 console.log(res)
             })
@@ -37,11 +42,8 @@ class ListItemDelete extends Component {
 
 
     render() {
-        console.log("list Item Delete Called")
         return (
-            <div>
-                <button onClick={this.handleClick}>DELETE</button>
-            </div>
+            <button onClick={this.handleClick}><input type='image' alt='Delete' src='media/rubbish-bin.svg'/></button>
         )
     }
 }
@@ -56,9 +58,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
-        deleteListItem: (listItemId) => { dispatch({ type: 'DELETE_LIST_ITEM', _id: listItemId }) }
-    }
-}
+        updateProjectOne: (projectOne) => { dispatch({ type: 'UPDATE_PROJECT_ONE', projectOne }) }
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListItemDelete)
