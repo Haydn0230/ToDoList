@@ -1,14 +1,6 @@
-// import Route from 'react-router-dom';
-// import React from 'react'
-
-// export const ProtectedRoute =({Component, ...props}) => (
-    
-//     !props.userId ?
-//         <Route path='/login' render={() => (<LogIn {...props}/>)}/>
-//     :
-//         <Route path={'/'+ Component} render={(props, Component)=> (
-//             <Component {...props}/> 
-//         )}/>
-//     );
+export const FormatDate= (oldDate) => {
+    let newDate = new Date(oldDate)
+    return newDate.toLocaleDateString()
+}
 
 

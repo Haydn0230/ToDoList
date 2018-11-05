@@ -58,13 +58,13 @@ class ListItemAdd extends Component {
 
     render() {
         return (
-            <div>
-                <form>
+            <div className='list-add-container'>
+                <form className='list-add-form'>
                     <label htmlFor='listTitle'>List Title</label>
-                    <input type='text' id='listTitle' name='listTitle' onChange={this.handleChange} />
+                    <input className ='input-box' type='text' id='listTitle' name='listTitle' onChange={this.handleChange} />
 
                     <label htmlFor="listItem" >List Item</label>
-                    <input type='text' id='listItem' name='listItem' onChange={this.handleChange} />
+                    <input className ='input-box' type='text' id='listItem' name='listItem' onChange={this.handleChange} />
 
                     <label htmlFor='listDateCompletion'> Date for Completion</label>
                     <input type='date' id='listDateCompletion' name='listDateCompletion' onChange={this.handleChange} />

@@ -9,19 +9,19 @@ class ListItemEdit extends Component {
         super()
         this.state = {
             listOwnership: '',
-            listTitle: '',// listTitle,
-            listItem: '',//listItem,
-            listDateCompletion: '',//listDateCompletion,
-            isEdited: false
+            listTitle: '',
+            listItem: '',
+            listDateCompletion: '',
+            
 
         }
     }
     handleChange = event => {
         this.setState({
             [event.target.id]: event.target.value,
-
         });
     }
+
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -47,7 +47,7 @@ class ListItemEdit extends Component {
             }
             return listItem
         })
-
+        console.log("newListItems", newListItems)
         // push the newlistitem onto the project
         let projectOneNew = this.props.projectOne
         projectOneNew[0].listItem = newListItems
@@ -59,9 +59,10 @@ class ListItemEdit extends Component {
         axios.put('/editList/' + this.props.projectOne[0]._id, {'listItem':data}, config)
             .then((res) => {
                 console.log(res)
-                this.setState({
-                    isEdited: true
-                })
+                this.props.onChange();
+                // this.setState({
+                //     isEdited: true
+                // })
             })
             .catch((err) => {
                 console.log(err)
@@ -74,8 +75,8 @@ class ListItemEdit extends Component {
         const { isEdited } = this.state;
         return (
             <React.Fragment>
-                {!isEdited ? (
-                    <form>
+    
+                    <form className={`list-edit-form ${this.props.isEditable}`}>
                         <label className='form-label'htmlFor='listTitle'>List Title</label>
                         <input type='text' id='listTitle' name='listTitle' placeholder={listTitle} onChange={this.handleChange} />
 
@@ -86,9 +87,7 @@ class ListItemEdit extends Component {
                         <input type='date' id='listDateCompletion' name='listDateCompletion' placeholder={listDateCompletion} onChange={this.handleChange} />
                         <button onClick={this.handleSubmit} id={_id} type='button'>Save</button>
                     </form>
-                ) : (
-                        <p>Changes have been made</p>
-                    )}
+
 
             </React.Fragment>
         )

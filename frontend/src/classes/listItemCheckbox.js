@@ -29,14 +29,14 @@ constructor() {
         // push the newlistitem onto the project
         let projectOneNew = this.props.projectOne
         projectOneNew[0].listItem= newListItems
-        console.log(newListItem)
+        
         //update the store with the new project info 
         //this.props.updateProjectOne(projectOneNew)
 
         
         axios.put('/editList/' + this.props.projectOne[0]._id, {'listItem':newListItem}, config)
         .then((res) => {
-            console.log(res)
+            
             this.setState({
                 isEdited: true
             })
@@ -52,7 +52,6 @@ constructor() {
     }
 
     render() {
-        console.log("checkbox" ,this.props)
         return (
              <input type='checkbox' id={this.props.id} defaultChecked={this.props.value} onClick={this.handleClick} />
         )

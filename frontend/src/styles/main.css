@@ -29,7 +29,16 @@ a{
 .navBar-ul{
     margin-left:50%;
 }
-
+.list-icon {
+    height: 2em;
+    width:2em;
+    background-color:white;
+    border:none;
+}
+.list-button{
+    border:none;
+    background-color: white;
+}
 .listBox {
 
     margin:5px;
@@ -55,7 +64,7 @@ height: 40px;
     padding-right: 5px;
     padding-left: 0 px;
 }
-.listFeatures{
+.list-features{
     margin:0% 0% 0% 20%;
     border: 0.7px solid black;
     border-radius: 10px;
@@ -69,19 +78,45 @@ height: 40px;
     flex-wrap:wrap;
     margin:auto;
 }
+
+.list-add {
+    margin:auto;
+}
+.list-add-container {
+    margin:auto;
+    border: 0.7px solid black;
+    border-radius: 10px;
+    width:80%;
+    padding:5px;
+    box-sizing: border-box;
+    display:block;
+}
 h3 {
     margin:0px;
 }
 
 .userContainer{
     height: 10%;
-
+    display:inline-flex;
 }
 .userCircle {
-    height: 100px; 
-    width:100px; 
-    background-color: aqua;
-    border-radius: 45px;
+    /* height: 100px; 
+    width:100px;
+    border: 0.1px solid grey;
+    box-shadow: inset 0px 0px 40px 40px #DBA632;
+    border-width:2em;
+    border-radius: 95px; */
+
+    height: 100px;
+    width: 100px;
+    padding: 1em;
+    margin: 1em;
+    border: 0.1px solid grey;
+    box-shadow: 0px 0px 10px 0px grey;
+    border-radius: 95px;
+}
+.user-button{
+
 }
 .App {
     margin:auto;
@@ -113,4 +148,11 @@ body{
 .addUserErrorOn{
     visibility: visible;
     color: red;
+}
+
+.editFormOff {
+    visibility: hidden;
+}
+.editFormOn {
+    visibility: visible;
 }

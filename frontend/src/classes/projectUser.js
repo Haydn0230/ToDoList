@@ -106,6 +106,12 @@ class ProjectUser extends Component {
         })
     }
 
+    goBack = (e) =>{
+        this.setState({
+            addUser:false 
+        })
+    }
+
     render() {
         console.log("Project User Called")
         const { userAccess } = this.props.projectOne[0]
@@ -134,7 +140,8 @@ class ProjectUser extends Component {
                             <form>
                                 <label htmlFor="email" > Email</label>
                                 <input type='text' id='email' name='email' onChange={this.handleChange} />
-                                <button onClick={this.handleSubmit} type='button'>Add User</button>
+                                <button onClick={this.handleSubmit} type='button' className='add-user-buttons'>Add User</button>
+                                <button onClick={this.goBack} type ='button' className='add-user-buttons'>Cancel</button>
                                 <p className={`${this.state.userError}`}>Cannot find user to add</p>
                             </form>
                         </div>

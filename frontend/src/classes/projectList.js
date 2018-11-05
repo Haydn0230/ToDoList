@@ -5,7 +5,7 @@ import store from '../store'
 import ProjectUser from './projectUser'
 import {setProjectId, setProject, setLoading} from '../actions'
 import {connect} from 'react-redux'
-
+import {FormatDate} from '../utils'
 class ProjectList extends Component {
     constructor() {
         super()
@@ -42,16 +42,17 @@ class ProjectList extends Component {
         // this.getProjectItem();
     }
     render() {
-        console.log("Project List Called", this.props )
-        const { isLoading, projectOne } = this.props
+        //console.log("Project List Called", this.props )
+        const { isLoading, projectTitle,projectCompletionDate,userAccess } = this.props.projectOne[0]
+        let date =  FormatDate(projectCompletionDate)
         return (
             <div>
                     <div>
                         <div>
 
                             <div>
-                                <h1>{projectOne.projectTitle}</h1>
-                                <h3>{projectOne.projectCompletionDate}</h3>
+                                <h1>{projectTitle}</h1>
+                                <h3>{date}</h3>
                             </div>
 
                             <div>
@@ -63,7 +64,7 @@ class ProjectList extends Component {
                         <div>
 
                             <div>
-                                <ProjectUser proke userAccess={projectOne.userAccess}/>
+                                <ProjectUser proke userAccess={userAccess}/>
                             </div>
 
                            

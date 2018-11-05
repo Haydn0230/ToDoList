@@ -43,10 +43,17 @@ class ListItemDelete extends Component {
 
     render() {
         return (
-            <button onClick={this.handleClick}><input type='image' alt='Delete' src='media/rubbish-bin.svg'/></button>
+            <button onClick={this.handleClick} className='list-button'><img alt='Delete' src='/media/rubbish-bin.svg' className='list-icon'/></button>
         )
     }
 }
+/*
+absolute: https://localhost:3000/media/
+relative: ../media
+relative root: /media/
+
+*/
+
 
 const mapStateToProps = (state) => {
     return ({

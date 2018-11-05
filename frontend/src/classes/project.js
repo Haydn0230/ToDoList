@@ -4,6 +4,7 @@ import axios from 'axios'
 import store from '../store'
 import {connect} from 'react-redux'
 import { setProjectId } from '../actions';
+import {FormatDate} from '../utils'
 
 class Project extends Component {
     constructor() {
@@ -27,14 +28,10 @@ class Project extends Component {
 
                 //check if theres anything in the response element
                 if(Object.keys(res.data).length !== 0){
-                    console.log('Object.keys(this.props.projectAll)',Object.keys(this.props.projectAll))
                    if (Object.keys(this.props.projectAll).length === 0) this.props.addProjectAll(res.data);
                 }
                 
                 this.props.setLoading(false);
-
-                //this.forceUpdate();
-            console.log("project.projects", res.data)
                 
             })
             .catch((err) => {
@@ -57,21 +54,20 @@ class Project extends Component {
     }
 
     render() {
-        console.log("project called", this.props)
         const {isLoadingProject, projectAll} = this.props;
         return (
             <div className='project-grid'>
                 {!isLoadingProject ? (
                     projectAll.map(project => {
                         const {_id,projectTitle, projectCompletionDate} = project
-                        console.log(_id,projectTitle, projectCompletionDate)
+                        let date =  FormatDate(projectCompletionDate)
                         return (
                             <div className='project' id={_id} key={projectTitle} onClick={this.handleClick}>
                                 <div className='project-title'>
                                     <p>{projectTitle}</p>
                                 </div>
                                 <div className='project-body'>
-                                    <p>{projectCompletionDate}</p>
+                                    <p>{date}</p>
                                 </div>
                                 {/* <button onClick={(e) => this.handleClick(e, _id)} id={_id}>View Project</button> */}
                                 <button onClick={this.handleClick} id={_id}>View Project</button>
