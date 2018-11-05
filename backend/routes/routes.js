@@ -10,10 +10,12 @@ router = (app) => {
     // <<< Users >>>
     app.route('/addUser')
     .post((req,res,next) =>myControllersUser.addUser(req,res,next));
-    console.log("router working");
+    
     app.route('/verify')
     .post((req,res,next)=> myControllersUser.postUser(req,res,next));
     
+    app.route('/findUser')
+    .post(verify,(req,res,next)=>myControllersUser.getUserByEmail(req,res,next));
 
     app.route('/user/:id')
     .get(verify,(req,res,next) => myControllersUser.getUser(req,res,next))
@@ -35,14 +37,25 @@ router = (app) => {
     
     app.route('/editList/:id')
     .put(verify,(req,res,next)=>myControllersList.putEditList(req,res,next))
+
+    app.route('/deleteList/:id')
+    .put(verify,(req,res,next) => myControllersList.deleteList(req,res,next))
+
     .delete(verify,(req,res,next) => myControllersList.deleteList(req,res,next));
 
     // <<< Project Users >>>
+    // get users assocaited with project
     app.route('/addProjectUser/:id') 
     .put(verify,(req,res,next)=> myControllersProUser.putAddProUser(req,res,next));
 
+    //get projects assocaited with userID
+    app.route('/getProjects/:id')
+    .get(verify, (req,res,next)=> myControllersProUser.getUsersProject(req,res,next));
+
+
+    //delete userID on project with project ID
     app.route('/projectUser/:id') 
-    .delete(verify,(req,res,next)=> myControllersProUser.deleteProUser(req,res,next));
+    .put(verify,(req,res,next)=> myControllersProUser.deleteProUser(req,res,next));
 
 }
  

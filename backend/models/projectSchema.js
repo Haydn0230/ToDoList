@@ -9,10 +9,14 @@ const ProjectSchema = new schema({
         listOwnership: { type: String, default: 0 },
         listDateCreated: { type: Date, default: Date },
         listDateCompletion: { type: Date },
+        listItemCompleted:{type:Boolean, default:false}
     
     }],
     userAccess: [{
-        userID:{type:String}
+        email:{type:String},
+        userId:{type:String},
+        firstName:{type:String},
+        lastName:{type:String}
     }],
     projectOwner:{type:String},
     projectCompletionDate:{type:Date, required:[true, 'project completion date required']}

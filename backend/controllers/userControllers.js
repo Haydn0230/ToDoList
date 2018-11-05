@@ -11,20 +11,33 @@ module.exports = {
             })
             .catch(next);
     },
+    getUserByEmail: (req, res, next) => {
+        User.findOne({ email: req.body.email })
+            .then((user) => {
+
+                res.status(200).json({
+                    'email':user.email,
+                    'userId':user._id,
+                    'firstName':user.firstName,
+                    'lastName':user.lastName
+                });
+            })
+            .catch(next);
+    },
     addUser: (req, res, next) => {
         User.create(req.body)
             .then((user) => {
                 user.password = 0;
                 var token = AuthUser.AuthenticateUser(user);
-                res.status(200).json({ "auth": "true", "token": token });
+                res.status(200).json({ "auth": "true", "token": token, 'user':user });
             })
             .catch(next);
 
     },
     postUser: (req, res, next) => {
-        console.log("called verify");
+        
         User.findOne({ email: req.body.email }, (err, user) => {
-            console.log(req.body);
+            
             if (err) {
                 throw err;
             }
@@ -35,7 +48,8 @@ module.exports = {
                     if (hashesMatch === true) {
                         user.password = '';
                         let token = AuthUser.AuthenticateUser(user);
-                        res.status(200).json({ "auth": true, "token": token });
+                        res.status(200).json({ "auth": true, "token": token, "user": user });
+                        //res.status(200).json({ "auth": true, "token": token, "userId": user._id });
                         // window.localStorage.setItem("token", token)
                     } else {
                         res.status(401).json({ "status": "unauthorized" });

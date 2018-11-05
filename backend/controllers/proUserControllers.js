@@ -2,8 +2,17 @@ const Project = require('../models/projectSchema');
 const mongoose = require('mongoose');
 
 module.exports = {
+    getUsersProject: (req,res,next) => {
+        Project.find({"userAccess.userID":req.params.id})
+            .then((project) =>{
+                res.status(200).send(project);
+                console.log("success")
+                //res.json({"state":"IT LIVES"})
+            })
+            .catch(next)
+    },
     putAddProUser: (req, res, next) => {
-        console.log(">>>>>1");
+        //find the project by the project ID
         Project.findById({_id:req.params.id}, (err, project) => {
             if (err) {
                 res.status(500).json({"status":"Error"});
@@ -12,11 +21,13 @@ module.exports = {
                 res.status(404).json({"status":"not found"});
                 throw err;
             }
-
+            //add the json body that contains userAccess onto project.user
             project.userAccess.push(req.body.userAccess);
+            
             project.save(function(err){
                 if (err) throw err
-                res.status(200).json({"status":"success"});
+                //send new project with added user back
+                res.status(200).json({project});
             });
         });
 
