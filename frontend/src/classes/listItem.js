@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import store from '../store'
 import ListItemEdit from './listItemEdit'
 import ListItemAdd from './listItemAdd'
 import ListItemDelete from './listItemDelete'
@@ -20,17 +18,17 @@ class ListItem extends Component {
                     } = ListItem
                     return (
                         <div className='listItem-container'>
-                            <div className ='listBox'key={listTitle}>
-                            <ul className ='listBox-ul'>
-                                <li>{listTitle}</li>
-                                <li>{listItem}</li>
-                                <li>{listDateCompletion}</li>
-                                <li className='checkBox'><CheckBox id={_id} value={listItemCompleted}/></li>
-                                <li><ListItemDelete listItemId={_id} /></li>
-                            </ul>
+                            <div className='listBox' key={listTitle}>
+                                <ul className='listBox-ul'>
+                                    <li>{listTitle}</li>
+                                    <li>{listItem}</li>
+                                    <li>{listDateCompletion}</li>
+                                    <li className='checkBox'><CheckBox id={_id} value={listItemCompleted} /></li>
+                                    <li><ListItemDelete listItemId={_id} /></li>
+                                </ul>
                             </div>
                             <div className='listFeatures' key={_id}>
-                                 <ListItemEdit listItem={ListItem} />
+                                <ListItemEdit listItem={ListItem} />
                             </div>
                         </div>
                     )
@@ -38,7 +36,6 @@ class ListItem extends Component {
                 <div className='listAdd'>
                     <ListItemAdd />
                 </div>
-
             </div>
         )
     }

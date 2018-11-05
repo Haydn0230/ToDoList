@@ -24,7 +24,13 @@ class Project extends Component {
         
         axios.get('/getProjects/' + store.getState().userId , config)
             .then((res) => {
-                this.props.addProjectAll(res.data);
+
+                //check if theres anything in the response element
+                if(Object.keys(res.data).length !== 0){
+                    console.log('Object.keys(this.props.projectAll)',Object.keys(this.props.projectAll))
+                   if (Object.keys(this.props.projectAll).length === 0) this.props.addProjectAll(res.data);
+                }
+                
                 this.props.setLoading(false);
 
                 //this.forceUpdate();
@@ -51,13 +57,14 @@ class Project extends Component {
     }
 
     render() {
-        console.log("project called")
+        console.log("project called", this.props)
         const {isLoadingProject, projectAll} = this.props;
         return (
             <div className='project-grid'>
                 {!isLoadingProject ? (
                     projectAll.map(project => {
                         const {_id,projectTitle, projectCompletionDate} = project
+                        console.log(_id,projectTitle, projectCompletionDate)
                         return (
                             <div className='project' id={_id} key={projectTitle} onClick={this.handleClick}>
                                 <div className='project-title'>

@@ -38,6 +38,7 @@ handleSubmit = e => {
     .then((res)=>{
         this.props.setCookies(res.data.token)
         this.props.setAuth(true)
+        console.log("user  - -- - ",res.data)
         this.props.setUserId(res.data.user._id)
         this.props.setUser(res.data.user)
         
