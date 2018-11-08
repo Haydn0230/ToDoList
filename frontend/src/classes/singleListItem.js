@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ListItemEdit from './listItemEdit'
-import ListItemAdd from './listItemAdd'
 import ListItemDelete from './listItemDelete'
 import CheckBox from './listItemCheckbox'
 import { connect } from 'react-redux'
@@ -12,26 +11,25 @@ class SingleListItem extends Component {
         super()
         this.state = {
             isEditable: 'editFormOff',
-            isFeaturesEditable:'editForm-features-off',
-            isBlockOff:'editForm-block-off'
+            isFeaturesEditable: 'editForm-features-off',
+            isBlockOff: 'editForm-block-off'
         }
     }
 
     handleEdit = (e) => {
-        //e.preventDefault();
 
         //change the state to show editable screen
         if (this.state.isEditable === 'editFormOff') {
             this.setState({
                 isEditable: 'editFormOn',
-                isFeaturesEditable:'',
-                isBlockOff:''
+                isFeaturesEditable: '',
+                isBlockOff: ''
             });
         } else {
             this.setState({
                 isEditable: 'editFormOff',
-                isFeaturesEditable:'editForm-features-off',
-                isBlockOff:'editForm-block-off'
+                isFeaturesEditable: 'editForm-features-off',
+                isBlockOff: 'editForm-block-off'
             });
         }
     }
@@ -48,23 +46,18 @@ class SingleListItem extends Component {
                             <li>{listItem}</li>
                             <li>{FormatDate(listDateCompletion)}</li>
                             <li className='checkBox'><CheckBox id={_id} value={listItemCompleted} /></li>
-                            {/* <li> */}
-                            </ul>
-                            </div>
-                            <div className='listItem-btn-group'>
-                                {/* <ul> */}
-                                <ListItemDelete listItemId={_id} />
-                                <button onClick={this.handleEdit} className='list-button-edit' ><FontAwesomeIcon icon='pencil-alt' /></button>
-                                {/* </ul> */}
-                            </div>
-                            {/* </li> */}
-                        
-                    
+                        </ul>
+                    </div>
+                    <div className='listItem-btn-group'>
+                        <ListItemDelete listItemId={_id} />
+                        <button onClick={this.handleEdit} className='list-button-edit' ><FontAwesomeIcon icon='pencil-alt' /></button>
+                    </div>
                 </div>
                 <div className={`list-features ${this.state.isEditable}`} key={_id}>
                     <ListItemEdit featureEdit={this.state.isFeaturesEditable}
-                    blockEdit={this.state.isBlockOff} listItem={this.props.ListItem} onChange={this.handleEdit} />
+                        blockEdit={this.state.isBlockOff} listItem={this.props.ListItem} onChange={this.handleEdit} />
                 </div>
+
             </div>
 
 

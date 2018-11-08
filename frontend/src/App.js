@@ -29,13 +29,17 @@ class App extends Component {
     })
   };
 
+  toggleBackDrop = () => {
+    this.props.setSideBar(false);
+  }
+
   render() {
     const {sideBarOpen} = this.props
       return (
         <div className="App">
           <NavBar toggleSideBar={this.toggleSideBar} />
           {sideBarOpen && <SideBar toggleSideBar={this.toggleSideBar} />}
-          {sideBarOpen && <Backdrop toggleSideBar={this.toggleSideBar}/>}
+          {sideBarOpen && <Backdrop toggleBackDrop={this.toggleBackDrop}/>}
           <Main {...this.props}/>
           <Footer />
         </div>

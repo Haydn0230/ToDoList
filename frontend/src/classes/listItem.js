@@ -52,7 +52,9 @@ class ListItem extends Component {
         //push the list througha filter
         const filteredListItem = this.filterListItems(listItem)
         return (
+  
             <div className="listItem-grid">
+                
                 <div className='list-add'>
                     <button onClick={this.addListItem} className='btn-save'>Add List Item</button>
                     {this.state.addFormVisible && <ListItemAdd addListItem={this.addListItem}/>}
@@ -64,7 +66,10 @@ class ListItem extends Component {
                         <SingleListItem ListItem={ListItem} />
                     )
                 })}
+
             </div>
+
+            
         )
     }
 }

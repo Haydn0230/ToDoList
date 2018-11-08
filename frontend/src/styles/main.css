@@ -72,8 +72,6 @@
 }
 li {
     list-style: none;
-    display:inline;
-    padding:0 5% 0 2%;
     text-decoration: none;
 }
 a{
@@ -89,8 +87,9 @@ a:hover {
     padding:0px;
 }
 .navBar-ul > li{
-    padding: 0px !important;
+    /* padding: 0px !important; */
     margin-left:20px;
+    display: inline;
 }
 .navBar-logo{
     
@@ -123,6 +122,7 @@ a:hover {
     border:none;
 }
 
+
 .listBox {
     margin:5px;
     border: 0.9px solid #A1D2CE;
@@ -133,9 +133,15 @@ a:hover {
     box-shadow: 0px 0px 5px 0px grey;
     display:flex;
     width:100%;
+    justify-content: center;
+    
 }
 .listBox-ul-container{
     width:80%;
+}
+.listBox-ul-container li{
+    display: inline;
+    margin-left:5%;
 }
 .listBox:focus{
     box-shadow: 0px 0px 5px 0px red;
@@ -143,10 +149,9 @@ a:hover {
 .listBox-ul {
     margin:6px 0;
     height: 75px;
-padding:0px; 
-text-align: left;
-height: 40px;
-    
+    padding:0px; 
+    text-align: left;
+    height: 40px;
 }
 .checkBox {
     margin:0% !important;
@@ -174,13 +179,27 @@ height: 40px;
 
 .listItem-btn-group {
     float:right; 
+    min-width: 140px;;
 }
 .listItem-btn-group > ul {
     padding:0;
     width:100px;
+    
 }
 
-
+.list-button-trash {
+    border:none;
+    background-color: white;
+    font-size:25px;
+    color:#FF1654;
+    margin:0 30px;
+}
+.list-button-edit {
+    border:none;
+    background-color: white;
+    font-size:25px;
+    color:#62A8AC;
+}
 .list-add {
     margin:30px 0 ;
 
@@ -203,18 +222,19 @@ height: 40px;
     margin: 20px 0 20px 20%;
 }
 
-/* .list-add{
-    margin:0 35%;
-} */
+
 .list-add-input {
     float:right;
     margin: 0 10% 0 0;
+}
+.listItem-container{
+    margin:auto;
 }
 
 h3 {
     margin:0px;
 }
-
+/* user circle */
 .userContainer{
     height: 10%;
     display:inline-flex;
@@ -235,8 +255,15 @@ h3 {
 
 
 }
+
+/* project filter */
 .project-list-filter-list{
     margin-top:50px;
+    padding: 0;
+}
+.project-list-filter-list li{
+    display:inline;
+    padding:0 5%;
 }
 .project-list-filter{
     width:33%;
@@ -249,32 +276,23 @@ h3 {
     font-size: 15px;
     color: white;
 }
-.list-button-trash {
-    border:none;
-    background-color: white;
-    font-size:25px;
-    color:#FF1654;
-    margin:0 30px;
-}
-.list-button-edit {
-    border:none;
-    background-color: white;
-    font-size:25px;
-    color:#62A8AC;
-}
+
 .btn-delete{
+    outline: none;
     border: none;
     margin-left: -1px;
-    width: 26px;
+    width: 34px;
     border-radius: 90px;
     font-size: 18px;
     color:#FF1654;
+    background: transparent;
 }
 .btn-add{
     border:none;
     margin-left: -2px;
     font-size: 20px;
     color:#62A8AC;
+    background: transparent;
 }
 .btn-save {
     background-color:#FF1654;
@@ -295,9 +313,6 @@ main {
 }
 .App {
     font-family: Verdana, Geneva, sans-serif;
-}
-.listItem-container{
-    margin:auto;
 }
 
 .form-label {
@@ -337,19 +352,8 @@ body{
 .list-edit-input {
     float:right;
 }
-.dimmable {
-    /* display: none; */
-    /* position: absolute; */
-    top: 0em;
-    left: 0em;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    vertical-align: middle;
-    padding: 1em;
-    background-color: rgba(0, 0, 0, 0.85);
-    opacity: 0.9; 
-}
+
+
 .error-message {
     font-size: 1em;
     color: red;
@@ -365,6 +369,7 @@ font-size:30;
 }
 .button-icon-plus {
     border:none;
+    background:transparent;
     position:auto;
     margin-top:35px;
 }
@@ -429,7 +434,8 @@ input[type=password] {
 }
 /* Log in form  */
 .logIn {
-    margin: 5% 40%;
+    margin: 5% auto;
+    width:300px;
 }
 .logIn-block{
     display:block;
@@ -454,15 +460,160 @@ input[type=password] {
 .project-add-input {
     float:right;
 }
-/* modal {
-    position: relative;
-    margin-top: 0px;
-    margin-left: auto;
-    margin-right: auto;
+
+@media (max-width:768px) {
+    .navBar-ul {
+        display:none;
+    }
+    .userContainer {
+        height: 10%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    /* project header  */
+    .project-list-header {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .project-list-title {
+        width:100%;
+        margin: 0 auto;
+    }
+    .project-list-filter {
+        
+        margin: 0 auto;
+    }
+    .project-list-filter ul {
+        padding:0;
+        margin: 0 auto;
+    }
+    .project-list-user{
+        margin: 0 auto;
+        width:100%;
+    }
+    /* project add  */
+    .project-add {
+        width: 200px;
+        margin: auto;
+    }
+    .project-add-block {
+        text-align: center;
+    }
+    .project-add-block input{
+        margin-bottom:20px;
+    }
+    /* project view */
+    .button-icon-plus {
+        margin: 0;
+    }
+    /*  list item */
+    .listItem-grid {
+        width: 100%;
+    }
+    .listItem-container {
+        width:95%;
+        margin:auto;
+    }
+    .listBox-ul-container {
+        margin:auto;
+    }
+    .listBox {
+        height:100%;
+        flex-direction:column;
+        margin:0;
+    }
+    .listBox-ul {
+        text-align: center;
+        margin-bottom: 10px;
+        margin-left: 0;
+    }
+    .listBox-ul li {
+        
+        margin-bottom: 10px;
+    }
+    .list-add {
+        margin: 10px 0;
+    }
+    .list-add {
+    margin: 10px 0;
+    /* justify-content: center; */
+    }
+
+    /* edit form  */
+    .list-features {
+        margin: 10px auto;
+        width:80%;
+ 
+    }
+    .list-features form {
+        display: flex;
+        flex-direction: column;
+    }
+    .list-features button {
+        margin:auto;
+    }
+    .list-edit-block {
+        display: block;
+        text-align: center;
+        margin:0;
+    }
+    .list-edit-input {
+       float:none;
+    }
+
+    /* add list form */
+    .list-add-container {
+        width:95%;
+        margin:auto;
+    }
+    .listBox-ul{
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        height: 100%;
+    }
+
+    .listBox-ul li {
+        display: block;
+
+        margin:10px 10px;
+
+    }
+    /* sign up form  */
+
+    .sign-up {
+        width:100%;
+        margin:auto;
+    }
+
+    .sign-up form{
+    margin: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    }
+    .sign-up-block {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        /* margin: 20px 0; */
+        width: 100%;
+        margin: 20px auto;
+    }
+
+    .sign-up-block label {
+        text-align: center;
+    }
+    .sign-up-input {
+        margin:auto;
+    }
+    .sign-up button {
+        margin:auto;
+    }
+
+
+
 }
-modals {
-    position: relative;
-    margin-top: 0px;
-    margin-left: auto;
-    margin-right: auto;
-} */

@@ -28,7 +28,7 @@ class NavBar extends Component {
         const isAuth = this.props.isAuth;
         return (
             <div className="navBar">
-             <NavIcon /> 
+             <NavIcon toggleSideBar ={this.props.toggleSideBar}/> 
             <div className='navBar-logo'>
                 Whats to do?
             </div>
