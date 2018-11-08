@@ -1,13 +1,14 @@
-.project {
+.project-grid-project {
     margin: 10px;
-    border: 0.5px solid black;
+    border: 0.9px solid #A1D2CE;
     border-radius: 10px;
     width:150px;
     padding:5px;
     box-sizing: border-box;
+    box-shadow: 0px 0px 10px 0px grey
 }
 
-.project-title {
+.project-grid-title {
     border-bottom: 0.3px solid gray;
     margin: 1% 5%;
 }
@@ -17,40 +18,130 @@
     flex-wrap:wrap;
 }
 
+.project-list-header {
+    display:flex;
+    flex-wrap:wrap;
+}
+
+.project-list-user{
+    float: right;
+    width:33%;
+
+}
+/* add user form */
+.add-user{
+    margin: 10px;
+    border: 0.9px solid #A1D2CE;
+    border-radius: 10px;
+    height: 100px;
+    padding:5px;
+    display:block;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 10px 0px grey
+}
+.add-user-block{
+    display:block;
+    text-align:left;
+    margin: 20px 20px;
+}
+.add-user-input{
+    float:right;
+    margin: 0 0 0 25px;
+}
+
+.add-user-buttons {
+    background-color:#FF1654;
+    height:30px;
+    width:80px;
+    margin-left:10px;
+    border-radius: 10px; 
+    font-size:15px;
+    color:white;
+}
+
+.project-list-title {
+    text-align: left;
+    width:33%;
+}
+.project-list-h1 {
+    margin: 20px 0 4px 2%;
+    
+}
+.project-list-date {
+    margin-left:4%;
+}
 li {
     list-style: none;
     display:inline;
-    padding:0% 5%;
+    padding:0 5% 0 2%;
     text-decoration: none;
 }
 a{
     text-decoration: none;
+    color:white;
 }
+a:hover {
+    color: #FF1654
+}
+/* <<<<< navbar CSS >>>>>> */
 .navBar-ul{
-    margin-left:50%;
+    margin-top:0px;
+    padding:0px;
 }
+.navBar-ul > li{
+    padding: 0px !important;
+    margin-left:20px;
+}
+.navBar-logo{
+    
+}
+.spacer {
+    flex:1;
+}
+.navBar {
+    margin:0px;
+    height: 50px;
+    background-color:#247BA0; 
+    display:flex;
+    align-items:center;
+    padding: 0 1em;
+}
+.navBar-btn {
+    border:none;
+    background-color:#247BA0; 
+    color: white;
+    font-size: 1em;
+}
+.navBar-btn:hover {
+    color:#FF1654;
+}
+/* <<<<< List CSS >>>>>> */
 .list-icon {
     height: 2em;
     width:2em;
     background-color:white;
     border:none;
 }
-.list-button{
-    border:none;
-    background-color: white;
-}
-.listBox {
 
+.listBox {
     margin:5px;
-    border: 0.5px solid grey;
+    border: 0.9px solid #A1D2CE;
     border-radius: 10px;
-    height: 40px;
+    height: 50px;
     padding:5px;
     box-sizing: border-box;
-
+    box-shadow: 0px 0px 5px 0px grey;
+    display:flex;
+    width:100%;
+}
+.listBox-ul-container{
+    width:80%;
+}
+.listBox:focus{
+    box-shadow: 0px 0px 5px 0px red;
 }
 .listBox-ul {
-    margin:0% 30% 0% 0%;
+    margin:6px 0;
     height: 75px;
 padding:0px; 
 text-align: left;
@@ -58,39 +149,68 @@ height: 40px;
     
 }
 .checkBox {
-    margin:0%;
+    margin:0% !important;
+    float:right;
 }
 .listBox-ul li {
-    padding-right: 5px;
+    padding-right: 0px;
     padding-left: 0 px;
+    margin:0 10% 0 0;
 }
 .list-features{
     margin:0% 0% 0% 20%;
-    border: 0.7px solid black;
+    border: 0.9px solid #A1D2CE;
     border-radius: 10px;
-    width:80%;
     padding:5px;
     box-sizing: border-box;
     display:block;
+    box-shadow: 0px 0px 10px 0px grey;
 }
+/* individual list items */
 .listItem-grid{
-    display:flex;
-    flex-wrap:wrap;
     margin:auto;
+    width:60%;
 }
 
-.list-add {
-    margin:auto;
+.listItem-btn-group {
+    float:right; 
 }
+.listItem-btn-group > ul {
+    padding:0;
+    width:100px;
+}
+
+
+.list-add {
+    margin:30px 0 ;
+
+}
+/* list add form  */
 .list-add-container {
-    margin:auto;
-    border: 0.7px solid black;
+    border: 0.7px solid #A1D2CE;
     border-radius: 10px;
-    width:80%;
+    margin:3% 20% 2% 20%;
     padding:5px;
     box-sizing: border-box;
     display:block;
+    background-color: white;
+    box-shadow: 0px 0px 10px 0px grey;
 }
+
+.list-add-block {
+    display:block;
+    text-align:left;
+    margin: 20px 0 20px 20%;
+}
+
+/* .list-add{
+    margin:0 35%;
+} */
+.list-add-input {
+    float:right;
+    margin: 0 10% 0 0;
+}
+
 h3 {
     margin:0px;
 }
@@ -100,27 +220,81 @@ h3 {
     display:inline-flex;
 }
 .userCircle {
-    /* height: 100px; 
-    width:100px;
-    border: 0.1px solid grey;
-    box-shadow: inset 0px 0px 40px 40px #DBA632;
-    border-width:2em;
-    border-radius: 95px; */
-
-    height: 100px;
-    width: 100px;
+    height: 30px;
+    width: 30px;
     padding: 1em;
     margin: 1em;
-    border: 0.1px solid grey;
+    border: 0.1px solid #A1D2CE;
     box-shadow: 0px 0px 10px 0px grey;
     border-radius: 95px;
 }
+.userCircle-intials{
+    display: inline;
+}
 .user-button{
 
+
+}
+.project-list-filter-list{
+    margin-top:50px;
+}
+.project-list-filter{
+    width:33%;
+}
+.project-list-filter-btn{
+    background-color: #FF1654;
+    height: 40px;
+    width: 92px;
+    border-radius: 10px;
+    font-size: 15px;
+    color: white;
+}
+.list-button-trash {
+    border:none;
+    background-color: white;
+    font-size:25px;
+    color:#FF1654;
+    margin:0 30px;
+}
+.list-button-edit {
+    border:none;
+    background-color: white;
+    font-size:25px;
+    color:#62A8AC;
+}
+.btn-delete{
+    border: none;
+    margin-left: -1px;
+    width: 26px;
+    border-radius: 90px;
+    font-size: 18px;
+    color:#FF1654;
+}
+.btn-add{
+    border:none;
+    margin-left: -2px;
+    font-size: 20px;
+    color:#62A8AC;
+}
+.btn-save {
+    background-color:#FF1654;
+    height:40px;
+    width:80px;
+    
+    border-radius: 10px; 
+    font-size:15px;
+    color:white;
+}
+
+main {
+    width:100%;
+    display: inline-block;
+    text-align: center;
+    color:#62A8AC;
+    
 }
 .App {
-    margin:auto;
-    height: 100%;
+    font-family: Verdana, Geneva, sans-serif;
 }
 .listItem-container{
     margin:auto;
@@ -129,30 +303,166 @@ h3 {
 .form-label {
     margin: 0% 2% 0% 5%;
 }
-.Home {
-    height: 100%;
-}
-main {
-    height: 100%;
-}
-#root{
-    height:700px;
-}
 body{
     height:100%;
+    margin: 0px;
+    padding:0px;
+    
 }
-.addUserErrorOff{
-    visibility: hidden;
-
-}
-.addUserErrorOn{
-    visibility: visible;
-    color: red;
+.App{
+    float:center;
 }
 
+/* Edit form  */
 .editFormOff {
     visibility: hidden;
+    height: 0px;
+}
+.editForm-features-off{
+    visibility: hidden;
+    height: 0px;
+}
+.editForm-block-off{
+    margin:0 !important;
+    height: 0;
 }
 .editFormOn {
     visibility: visible;
 }
+.list-edit-block{
+    display:block;
+    text-align:left;
+    margin: 20px 0;
+}
+.list-edit-input {
+    float:right;
+}
+.dimmable {
+    /* display: none; */
+    /* position: absolute; */
+    top: 0em;
+    left: 0em;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    vertical-align: middle;
+    padding: 1em;
+    background-color: rgba(0, 0, 0, 0.85);
+    opacity: 0.9; 
+}
+.error-message {
+    font-size: 1em;
+    color: red;
+
+}
+
+.plus-icon {
+font-size:30;
+}
+.fa-plus-circle {
+    font-size:60px;
+    color: #78CAD2;
+}
+.button-icon-plus {
+    border:none;
+    position:auto;
+    margin-top:35px;
+}
+/* sign up form */
+.sign-up-block {
+    display:block;
+    text-align:left;
+    margin: 20px 0;
+}
+.sign-up {
+    margin:0 40%;
+}
+.sign-up-input {
+    float:right;
+   margin-left:20px;
+   text-align: center;
+   font-size: 16px;
+
+}
+
+/*  Input boxes  */
+input[type=text]:focus {
+    box-shadow: 0px 0px 10px 0px grey;
+}
+
+input[type=text] {
+    border-radius: 5px;
+    height: 20px;
+    width: 200px;
+    border: 0.5px solid grey;
+    text-align: center;
+    font-size: 16px;;
+    
+}
+
+input[type=date]:focus {
+    box-shadow: 0px 0px 10px 0px grey;
+}
+
+input[type=date] {
+    border-radius: 5px;
+    height: 20px;
+    width: 200px;
+    border: 0.5px solid grey;
+    text-align: center;
+    font-size: 16px;
+    
+}
+
+input[type=password]:focus {
+    box-shadow: 0px 0px 10px 0px grey;
+}
+
+input[type=password] {
+    border-radius: 5px;
+    height: 20px;
+    width: 200px;
+    border: 0.5px solid grey;
+    text-align: center;
+    font-size: 16px;
+    
+}
+/* Log in form  */
+.logIn {
+    margin: 5% 40%;
+}
+.logIn-block{
+    display:block;
+    text-align:left;
+    margin: 20px 0;
+}
+.logIn-input {
+    float:right;
+
+}
+
+/* project add form  */
+.project-add-block{
+    display:block;
+    text-align:left;
+    margin: 20px 0;
+}
+
+.project-add{
+    margin:0 35%;
+}
+.project-add-input {
+    float:right;
+}
+/* modal {
+    position: relative;
+    margin-top: 0px;
+    margin-left: auto;
+    margin-right: auto;
+}
+modals {
+    position: relative;
+    margin-top: 0px;
+    margin-left: auto;
+    margin-right: auto;
+} */

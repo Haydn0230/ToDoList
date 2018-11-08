@@ -1,0 +1,21 @@
+.navIcon-btn {
+    display:flex;
+    flex-direction:column;
+    justify-content: space-around;
+    height: 20px;
+    width:30px;
+    background: transparent;
+    box-sizing: border-box;
+    border:none;
+    padding:0;
+}
+
+.navIcon-btn:focus {
+    outline: none;
+}
+
+.navIcon-btn-line{
+    width:30px; 
+    height:2px;
+    background: white;
+}

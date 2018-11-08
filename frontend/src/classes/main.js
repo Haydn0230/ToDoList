@@ -6,7 +6,6 @@ import Home from './home'
 import ProjectList from './projectList'
 import SignUp from './signUp'
 import ProjectAdd from './projectAdd'
-
 import '../styles/main.css'
 
 

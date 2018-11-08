@@ -5,6 +5,7 @@ import store from '../store'
 import {connect} from 'react-redux'
 import { setProjectId } from '../actions';
 import {FormatDate} from '../utils'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class Project extends Component {
     constructor() {
@@ -18,12 +19,12 @@ class Project extends Component {
 
 
     getProjects() {
-        //const {cookies} = this.props.cookies;
+        
         var config = {
-            "headers": { 'Authorization': 'bearer ' + store.getState().cookies}
+            "headers": { 'Authorization': 'bearer ' + this.props.cookies}
         }
         
-        axios.get('/getProjects/' + store.getState().userId , config)
+        axios.get('/getProjects/' + this.props.userId , config)
             .then((res) => {
 
                 //check if theres anything in the response element
@@ -44,7 +45,7 @@ class Project extends Component {
     }
 
     handleClick = (e) => {
-        //console.log("ID FROM HANDLE CLICK", e.target.id)
+        
         this.props.setProject(e.target.id)
         this.props.history.push('/ProjectView');
     }
@@ -62,15 +63,15 @@ class Project extends Component {
                         const {_id,projectTitle, projectCompletionDate} = project
                         let date =  FormatDate(projectCompletionDate)
                         return (
-                            <div className='project' id={_id} key={projectTitle} onClick={this.handleClick}>
-                                <div className='project-title'>
+                            <div className='project-grid-project' id={_id} key={projectTitle} onClick={this.handleClick}>
+                                <div className='project-grid-title'>
                                     <p>{projectTitle}</p>
                                 </div>
-                                <div className='project-body'>
+                                <div className='project-grid-body'>
                                     <p>{date}</p>
                                 </div>
                                 {/* <button onClick={(e) => this.handleClick(e, _id)} id={_id}>View Project</button> */}
-                                <button onClick={this.handleClick} id={_id}>View Project</button>
+                                <button onClick={this.handleClick} id={_id} className='btn-save'>View Project</button>
 
                             </div>
 
@@ -79,8 +80,8 @@ class Project extends Component {
                 ): (
                     <p>Loading. . .</p>
                 )}
-                <div className = 'project'>
-                    <button onClick={this.newProjectClick}>+</button>
+                <div className = 'project-grid-project'>
+                    <button className='button-icon-plus' onClick={this.newProjectClick}><FontAwesomeIcon className='plus-icon' icon='plus-circle'/></button>
                 </div>
             </div>
         )
@@ -97,6 +98,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state ) => {
     return ({
       cookies:state.cookies,
+      userId:state.userId,
       projectAll:state.projectAll,
       projectOne:state.projectOne,
       projectId: state.projectId,

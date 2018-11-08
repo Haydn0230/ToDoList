@@ -11,13 +11,18 @@ export function setProjectId(projectId){
         projectId:projectId
     }
 }
-
+export function setSideBar(sideBarOpen){
+    return {
+        type:"SET_SIDEBAR",
+        sideBarOpen:sideBarOpen
+    }
+};
 export function setUser(user){
     return {
         type:"SET_USER",
         user:user
     }
-}
+};
 
 export function setProject(projectAll) {
     console.log("ACTIONS PROJECT", projectAll)
@@ -25,8 +30,13 @@ export function setProject(projectAll) {
         type:"SET_PROJECT_ALL",
         projectAll:projectAll
     }
-}
-
+};
+export function setFilter(filter){
+    return {
+        type:"SET_FILTER",
+        filter:filter
+    }
+};
 export function setCookies(cookies){
     return {
         type:"SET_COOKIES",
@@ -38,7 +48,7 @@ export function setLoading(isLoadingProject) {
         type:"SET_LOADING",
         isLoadingProject:isLoadingProject
     }
-}
+};
 export function setNavigation(navigation) {
     return {
         type:"SET_NAVIGATION",

@@ -4,26 +4,34 @@ import ListItemAdd from './listItemAdd'
 import ListItemDelete from './listItemDelete'
 import CheckBox from './listItemCheckbox'
 import { connect } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FormatDate } from '../utils'
 
 class SingleListItem extends Component {
     constructor() {
         super()
         this.state = {
-            isEditable: 'editFormOff'
+            isEditable: 'editFormOff',
+            isFeaturesEditable:'editForm-features-off',
+            isBlockOff:'editForm-block-off'
         }
     }
 
     handleEdit = (e) => {
         //e.preventDefault();
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+
         //change the state to show editable screen
         if (this.state.isEditable === 'editFormOff') {
             this.setState({
-                isEditable: 'editFormOn'
+                isEditable: 'editFormOn',
+                isFeaturesEditable:'',
+                isBlockOff:''
             });
         } else {
             this.setState({
-                isEditable: 'editFormOff'
+                isEditable: 'editFormOff',
+                isFeaturesEditable:'editForm-features-off',
+                isBlockOff:'editForm-block-off'
             });
         }
     }
@@ -34,21 +42,28 @@ class SingleListItem extends Component {
         return (
             <div className='listItem-container'>
                 <div className='listBox' key={listTitle}>
-                    <ul className='listBox-ul'>
-                        <li>{listTitle}</li>
-                        <li>{listItem}</li>
-                        <li>{listDateCompletion}</li>
-                        <li className='checkBox'><CheckBox id={_id} value={listItemCompleted} /></li>
-                        <li><ListItemDelete listItemId={_id} /></li>
-                        <li>
-                            <button onClick={this.handleEdit} className={`list-button `}  >
-                                <img className='list-icon' src='/media/edit.svg' alt='edit' />
-                            </button>
-                        </li>
-                    </ul>
+                    <div className='listBox-ul-container'>
+                        <ul className='listBox-ul'>
+                            <li>{listTitle}</li>
+                            <li>{listItem}</li>
+                            <li>{FormatDate(listDateCompletion)}</li>
+                            <li className='checkBox'><CheckBox id={_id} value={listItemCompleted} /></li>
+                            {/* <li> */}
+                            </ul>
+                            </div>
+                            <div className='listItem-btn-group'>
+                                {/* <ul> */}
+                                <ListItemDelete listItemId={_id} />
+                                <button onClick={this.handleEdit} className='list-button-edit' ><FontAwesomeIcon icon='pencil-alt' /></button>
+                                {/* </ul> */}
+                            </div>
+                            {/* </li> */}
+                        
+                    
                 </div>
                 <div className={`list-features ${this.state.isEditable}`} key={_id}>
-                    <ListItemEdit listItem={this.props.ListItem} onChange={this.handleEdit} />
+                    <ListItemEdit featureEdit={this.state.isFeaturesEditable}
+                    blockEdit={this.state.isBlockOff} listItem={this.props.ListItem} onChange={this.handleEdit} />
                 </div>
             </div>
 

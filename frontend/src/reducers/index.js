@@ -21,6 +21,16 @@ export default (state, action) => {
                 ...state,
                 navigation: action.cookies
             };
+        case "SET_FILTER":
+            return {
+                ...state,
+                filter:action.filter
+            };
+        case "SET_SIDEBAR":
+            return {
+                ...state,
+                sideBarOpen: action.sideBarOpen
+            };
         case "SET_PROJECT_ALL":
             return {
                 ...state,

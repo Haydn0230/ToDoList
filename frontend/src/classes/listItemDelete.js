@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import store from '../store'
 import { connect } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class ListItemDelete extends Component {
 
@@ -43,7 +44,7 @@ class ListItemDelete extends Component {
 
     render() {
         return (
-            <button onClick={this.handleClick} className='list-button'><img alt='Delete' src='/media/rubbish-bin.svg' className='list-icon'/></button>
+            <button onClick={this.handleClick} className='list-button-trash'><FontAwesomeIcon icon='trash'/></button>
         )
     }
 }

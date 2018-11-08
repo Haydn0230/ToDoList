@@ -37,9 +37,9 @@ constructor() {
         axios.put('/editList/' + this.props.projectOne[0]._id, {'listItem':newListItem}, config)
         .then((res) => {
             
-            this.setState({
-                isEdited: true
-            })
+            // this.setState({
+            //     isEdited: true
+            // })
         })
         .catch((err) => {
             console.log(err)

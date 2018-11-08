@@ -8,7 +8,9 @@ window.devToolsExtension ? window.devToolsExtension() : f => f
 );
 
 const intialState ={
+    sideBarOpen:false,
     userId:"",
+    filter:'ALL',
     user:[],
     projectId:"",
     isAuth:false,
