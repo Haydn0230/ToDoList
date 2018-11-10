@@ -7,10 +7,11 @@ import ProjectList from './projectList'
 import SignUp from './signUp'
 import ProjectAdd from './projectAdd'
 import '../styles/main.css'
+import AccountAdmin from './account'
 
 
 class Main extends Component {
-
+    //router allows components to switch out of DOM
     render() {
         const isAuth = this.props.isAuth;
         return (
@@ -21,6 +22,7 @@ class Main extends Component {
                         <Route path='/Project' render={() => (<Project {...this.props} />)} />
                         <Route path='/ProjectView' render={() =>(<ProjectList {...this.props}/>)}/>
                         <Route path='/ProjectAdd' render={() =>(<ProjectAdd {...this.props}/>)}/>
+                        <Route path='/Account' render={() =>(<AccountAdmin {...this.props}/>)}/>
                     </Switch>
                     ) : (
                     <Switch>

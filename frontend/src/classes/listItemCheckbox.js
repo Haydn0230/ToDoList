@@ -16,12 +16,12 @@ constructor() {
         var config = {
             "headers": { 'Authorization': 'bearer ' + this.props.cookies }
         }
+        //create new array with edited list item
         let newListItem =[]
         let newListItems = this.props.projectOne[0].listItem.filter((listItem) => {
             if (e.target.id === listItem._id) {
                 listItem.listItemCompleted = e.target.checked;
-                newListItem = listItem
-                console.log("filtered list item", listItem.listItemCompleted, "___", this.state.isChecked)
+                newListItem = listItem;
             }
             return listItem
         })
@@ -30,21 +30,16 @@ constructor() {
         let projectOneNew = this.props.projectOne
         projectOneNew[0].listItem= newListItems
         
-        //update the store with the new project info 
-        //this.props.updateProjectOne(projectOneNew)
-
-        
         axios.put('/editList/' + this.props.projectOne[0]._id, {'listItem':newListItem}, config)
         .then((res) => {
-            
-            // this.setState({
-            //     isEdited: true
-            // })
+
         })
         .catch((err) => {
             console.log(err)
         })
     }
+
+    //toggle checkbox and write to state
     componentDidMount() {
         this.setState({
             isChecked:this.props.value
@@ -57,13 +52,13 @@ constructor() {
         )
     }
 }
-
+//create functions to write to store
 const mapDispatchToProps = (dispatch) => {
     return {
         updateProjectOne: (projectOne) => { dispatch({ type: 'UPDATE_PROJECT_ONE', projectOne }) }
     }
 }
-
+//get values from store
 const mapStateToProps = (state) => {
     return ({
         cookies: state.cookies,
@@ -71,4 +66,6 @@ const mapStateToProps = (state) => {
         state: state
     });
 };
+
+//wrap component in connect function to connect to store
 export default connect(mapStateToProps,mapDispatchToProps)(CheckBox)

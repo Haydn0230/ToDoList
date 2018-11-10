@@ -27,6 +27,8 @@ class ProjectAdd extends Component {
 
         //call validation 
         const errors = validation(this.state);
+
+        //if error then throw error message
         if (errors !== '') {
             this.setState({
                 errorMessage: errors + ' required'
@@ -34,45 +36,45 @@ class ProjectAdd extends Component {
             return
         }
 
-
+        //set authorization token 
         var config = {
             "headers": { 'Authorization': 'bearer ' + this.props.cookies }
         }
-        console.log("USER ", this.props)
+        
+        //create data object to send to server 
         let data = {
             projectTitle: this.state.projectTitle,
             projectOwner: this.props.userId,
             projectCompletionDate: this.state.projectCompletionDate,
             listItem: [],
             userAccess: {
-                userID: this.props.userId,
+                userId: this.props.userId,
                 email: this.props.user.email,
                 firstName: this.props.user.firstName,
                 lastName: this.props.user.lastName
             }
         }
-
+        
         axios.post('/addProject', data, config)
             .then((res) => {
-                //console.log("this.props.projectAll.isEmpty()",this.props.projectAll.isEmpty())
                 this.setState({
                     isAdded: true
                 })
-                //console.log("Object.keys(this.props.projectAll).length",Object.keys(this.props.projectAll).length)
 
+                //checks if array of projects is empty
                 if (Object.keys(this.props.projectAll).length === 0) {
                     this.props.setProjectAll([res.data]);
-                    console.log('res.data.project', res.data.project)
+                    
                 } else {
                     const projectAllNew = this.props.projectAll;
 
+                    //add new project to array of projects 
                     projectAllNew.push(res.data);
-                    console.log("porjectAllNew.push(data)", projectAllNew)
-                    this.props.setProjectAll(projectAllNew);
-                    console.log("2")
-                }
-                //this.props.updateProjectOne(res.data)
 
+                    //write new project to store
+                    this.props.setProjectAll(projectAllNew);
+                    
+                }
             })
             .then(() => {
                 this.props.history.push('/Project');
@@ -112,12 +114,16 @@ class ProjectAdd extends Component {
         )
     }
 }
+
+//create functions to write to store
 const mapDispatchToProps = (dispatch) => {
     return {
         updateProjectOne: (projectOne) => { dispatch({ type: 'UPDATE_PROJECT_ONE', projectOne }) },
         setProjectAll: (projectAll) => { dispatch({ type: 'SET_PROJECT_ALL', projectAll }) }
     }
-}
+};
+
+//get values from store
 const mapStateToProps = (state) => {
     return ({
         userId: state.userId,
@@ -128,4 +134,5 @@ const mapStateToProps = (state) => {
         state: state
     });
 };
+//wrap component in connect function to connect to store
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectAdd)

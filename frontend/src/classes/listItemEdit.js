@@ -16,6 +16,8 @@ class ListItemEdit extends Component {
 
         }
     }
+
+    //writes user input to state
     handleChange = event => {
         this.setState({
             [event.target.id]: event.target.value,
@@ -34,11 +36,12 @@ class ListItemEdit extends Component {
             })
             return
         }
-
+        //sets authorization 
         var config = {
             "headers": { 'Authorization': 'bearer ' + this.props.cookies }
         }
 
+        //creates data object to send to server
         let data = {
             _id: this.props.listItem._id,
             listOwnership: '',
@@ -47,8 +50,7 @@ class ListItemEdit extends Component {
             listDateCompletion: this.state.listDateCompletion
         }
 
-        // loops through all list items finds the corresponding ID 
-        // then overwrites the listitem object with both unchanged and changed listitems
+        // creates new array of list items based on ID
         let newListItems = this.props.projectOne[0].listItem.filter((listItem) => {
             if (this.props.listItem._id === listItem._id) {
                 //use assign as copies the elements rather than make reference to
@@ -108,17 +110,19 @@ class ListItemEdit extends Component {
         )
     }
 }
-
+//create functions to write to store
 const mapDispatchToProps = (dispatch) => {
     return {
         updateProjectOne: (projectOne) => { dispatch({ type: 'UPDATE_PROJECT_ONE', projectOne }) }
     }
 }
-
+//get values from store
 const mapStateToProps = (state) => {
     return ({
         cookies: state.cookies,
         projectOne: state.projectOne,
     });
 };
+
+//wrap component in connect function to connect to store
 export default connect(mapStateToProps, mapDispatchToProps)(ListItemEdit)

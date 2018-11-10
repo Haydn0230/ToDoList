@@ -1,9 +1,6 @@
 import React, { Component } from '../../node_modules/react';
 import axios from 'axios';
-import { setUserId, setCookies, setAuth } from '../actions'
-import store from '../store'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 import {validation} from '../utils'
 
 class LogIn extends Component {
@@ -17,7 +14,7 @@ class LogIn extends Component {
     }
 
 
-
+    //gets user inputs and writes to state
     handleChange = event => {
         this.setState({
             [event.target.id]: event.target.value
@@ -25,10 +22,12 @@ class LogIn extends Component {
     }
 
     handleSubmit = event => {
+        event.preventDefault();
 
-        //verification 
+        //verification of inputs 
         const errors = validation(this.state)
-        console.log('errors', errors)
+        
+        //if inputs arent populated throw error message
         if (errors !== '') {
             this.setState({
                 errorMessage:errors + ' required'
@@ -36,7 +35,8 @@ class LogIn extends Component {
             return
         }
 
-        event.preventDefault();
+        
+
         axios.post('/verify', {
             "email": this.state.email,
             "password": this.state.password
@@ -82,6 +82,7 @@ class LogIn extends Component {
         )
     }
 }
+//create functions to write to store
 const mapDispatchToProps = (dispatch) => {
     return {
         setCookies: (cookies) => { dispatch({ type: 'SET_COOKIES', cookies }) },
@@ -91,7 +92,7 @@ const mapDispatchToProps = (dispatch) => {
         setLoading: (isLoadingProject) => { dispatch({ type: 'SET_LOADING', isLoadingProject }) }
     }
 }
-
+//get values from store
 const mapStateToProps = (state) => {
     return ({
         user: state.user,
@@ -100,4 +101,5 @@ const mapStateToProps = (state) => {
         state: state
     });
 }
+//wrap component in connect function to connect to store
 export default connect(mapStateToProps, mapDispatchToProps)(LogIn)

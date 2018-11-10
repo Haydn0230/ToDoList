@@ -48,14 +48,8 @@ class ListItemDelete extends Component {
         )
     }
 }
-/*
-absolute: https://localhost:3000/media/
-relative: ../media
-relative root: /media/
 
-*/
-
-
+//get values from store
 const mapStateToProps = (state) => {
     return ({
         cookies: state.cookies,
@@ -64,10 +58,12 @@ const mapStateToProps = (state) => {
     });
 };
 
+//create functions to write to store
 const mapDispatchToProps = (dispatch) => {
     return {
         updateProjectOne: (projectOne) => { dispatch({ type: 'UPDATE_PROJECT_ONE', projectOne }) }
     };
 };
 
+//wrap component in connect function to connect to store
 export default connect(mapStateToProps, mapDispatchToProps)(ListItemDelete)

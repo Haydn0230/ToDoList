@@ -22,13 +22,15 @@ class App extends Component {
       data: [],
     };
   }
-  
+
+  //switch side bar on and off
   toggleSideBar = () => {
     this.props.setSideBar((prevState) => {
       return {sideBarOpen: !prevState.sideBarOpen}
     })
   };
 
+  //sets backdrop on and off
   toggleBackDrop = () => {
     this.props.setSideBar(false);
   }

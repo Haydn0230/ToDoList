@@ -64,11 +64,14 @@ class SingleListItem extends Component {
         )
     }
 }
+
+//create functions to write to store
 const mapDispatchToProps = (dispatch) => {
     return {
     }
-}
+};
 
+//get values from store
 const mapStateToProps = (state) => {
     return ({
         cookies: state.cookies,
@@ -76,4 +79,6 @@ const mapStateToProps = (state) => {
         state: state
     });
 };
+
+//wrap component in connect function to connect to store
 export default connect(mapStateToProps, mapDispatchToProps)(SingleListItem);

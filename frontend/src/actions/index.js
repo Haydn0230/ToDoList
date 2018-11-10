@@ -1,10 +1,10 @@
+//actions to sent information to the store
 export function setUserId(userId) {
     return {
         type:"SET_USER_ID",
         userId: userId
     }
 }
-
 export function setProjectId(projectId){
     return {
         type:"SET_PROJECT_ID",
@@ -25,7 +25,6 @@ export function setUser(user){
 };
 
 export function setProject(projectAll) {
-    console.log("ACTIONS PROJECT", projectAll)
     return {
         type:"SET_PROJECT_ALL",
         projectAll:projectAll

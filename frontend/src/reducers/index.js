@@ -1,5 +1,5 @@
+//reducers write the action to the store
 export default (state, action) => {
-    console.log("Reducer called");
     switch (action.type) {
         case "SET_PROJECT_ID":
             return {
@@ -52,10 +52,8 @@ export default (state, action) => {
                 isLoadingProject: action.isLoadingProject
             };
         case "SET_PROJECT_ONE":
-            //loops throught the projects to find 
-            //the project id equal to action.projectId
+            //returns a single project by comparing ID
             let project = state.projectAll.filter(projects => {
-                console.log("PROJECT __ ", projects)
                 return action.projectId === projects._id
             })
             return {
@@ -68,16 +66,12 @@ export default (state, action) => {
                 projectOne: action.projectOne
             };
         case "ADD_LIST_ITEM":
-            console.log("1 state.projectOne.listItem", state.projectOne[0].listItem, "ACTION ", action.listItem)
-            //this function is rewriting the projectone state to only hold the list item causing it to break.
-            //need to find a way to create a new state, then append the new list item onto it
             return {
                 ...state,
                 'projectOne[0].listItem': [...action.listItem]
             };
 
-        //loops through the project.listItem to evaluate listItemId by action.listItemID
-        //places all those not equal to listItem.id into a new array
+        //creates new array based on ID to overwrite list items
         case "DELETE_LIST_ITEM":
             let listItems = state.projectOne[0].listItem.filter(listItem => {
                 return action._id !== listItem._id

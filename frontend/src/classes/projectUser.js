@@ -135,7 +135,8 @@ class ProjectUser extends Component {
 
     goBack = (e) => {
         this.setState({
-            addUser: false
+            addUser: false,
+            errorMessage:''
         })
     }
 
@@ -177,10 +178,9 @@ class ProjectUser extends Component {
                                 <label htmlFor="email" > Email</label>
                                 <input type='text' id='email' name='email' onChange={this.handleChange} className='add-user-input' />
                                 </span>
+                                {errorMessage !== '' && <p className='error-message'>{errorMessage}</p>}
                                 <button onClick={this.handleSubmit} type='button' className='add-user-buttons'>Add User</button>
                                 <button onClick={this.goBack} type='button' className='add-user-buttons'>Cancel</button>
-                                {errorMessage !== '' && <p className='error-message'>{errorMessage}</p>}
-
                             </form>
                         </div>
                     )}
@@ -189,6 +189,8 @@ class ProjectUser extends Component {
         )
     }
 }
+
+//create functions to write to store
 const mapDispatchToProps = (dispatch) => {
     return {
         updateProjectOne: (projectOne) => { dispatch({ type: 'UPDATE_PROJECT_ONE', projectOne }) }
@@ -196,10 +198,12 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
+//get values from store
 const mapStateToProps = (state) => {
     return ({
         cookies: state.cookies,
         projectOne: state.projectOne,
     });
 };
+//wrap component in connect function to connect to store
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectUser)

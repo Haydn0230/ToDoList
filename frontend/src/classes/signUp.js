@@ -160,4 +160,5 @@ const mapStateToProps = (state) => {
         state: state
     });
 };
+//wrap component in connect function to connect to store
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp)

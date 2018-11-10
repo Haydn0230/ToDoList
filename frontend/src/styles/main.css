@@ -1,3 +1,22 @@
+.account-input {
+    margin:auto;
+}
+.account-block{
+    display:flex;
+    flex-direction: column
+}
+
+.account-container form {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.account-container button {
+    margin: auto;
+}
+
+/* project view */
 .project-grid-project {
     margin: 10px;
     border: 0.9px solid #A1D2CE;
@@ -6,6 +25,25 @@
     padding:5px;
     box-sizing: border-box;
     box-shadow: 0px 0px 10px 0px grey
+}
+.project-btn-delete{
+    float:right;
+    outline:transparent;
+    background: transparent;
+    border: none;
+    color:#FF1654;
+    
+    
+}
+.project-grid-header {
+    width: 80%;
+    margin:auto;
+    display:flex;
+    flex-direction: column;
+}
+.project-grid-header p {
+    margin-bottom: 10%;
+    margin-top: 0;
 }
 
 .project-grid-title {
@@ -30,10 +68,10 @@
 }
 /* add user form */
 .add-user{
-    margin: 10px;
+    margin: 10px auto;
+    height:150px;
     border: 0.9px solid #A1D2CE;
     border-radius: 10px;
-    height: 100px;
     padding:5px;
     display:block;
     box-sizing: border-box;
@@ -91,8 +129,9 @@ a:hover {
     margin-left:20px;
     display: inline;
 }
-.navBar-logo{
-    
+.navBar-logo p{
+    color:white;
+    margin-left:30px;
 }
 .spacer {
     flex:1;
@@ -508,6 +547,10 @@ input[type=password] {
     .button-icon-plus {
         margin: 0;
     }
+    /* add user  */
+    .add-user{
+        height: auto;
+    }
     /*  list item */
     .listItem-grid {
         width: 100%;
@@ -525,9 +568,7 @@ input[type=password] {
         margin:0;
     }
     .listBox-ul {
-        text-align: center;
-        margin-bottom: 10px;
-        margin-left: 0;
+
     }
     .listBox-ul li {
         
@@ -571,8 +612,33 @@ input[type=password] {
     .listBox-ul{
         display:flex;
         flex-wrap: wrap;
+        flex-direction: column;
         justify-content: center;
         height: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+        margin-left: 0;
+    }
+
+    .list-add-input {
+        float:none;
+        margin:0.5em 0;
+     }
+
+    .list-add-form{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    .list-add-form button{
+        margin:auto;
+    }
+    .list-add-block {
+        display:flex;
+        flex-direction: column;
+        text-align:center;
+        margin:auto;
+    
     }
 
     .listBox-ul li {

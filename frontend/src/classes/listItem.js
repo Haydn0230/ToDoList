@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import ListItemEdit from './listItemEdit'
+// import ListItemEdit from './listItemEdit'
 import ListItemAdd from './listItemAdd'
-import ListItemDelete from './listItemDelete'
-import CheckBox from './listItemCheckbox'
+// import ListItemDelete from './listItemDelete'
+// import CheckBox from './listItemCheckbox'
 import { connect } from 'react-redux'
 import SingleListItem from './singleListItem'
 
@@ -39,17 +39,17 @@ class ListItem extends Component {
         return filteredList;
     }
 
+    //toggles the add list form
     addListItem = () =>{
-        console.log('add list item called')
         this.setState({
             addFormVisible:!this.state.addFormVisible
         });
     }
+
     render() {
         //set addlistform equal to list add component
-
         const { listItem } = this.props.projectOne[0]
-        //push the list througha filter
+        //push the list through a filter
         const filteredListItem = this.filterListItems(listItem)
         return (
   
@@ -73,12 +73,13 @@ class ListItem extends Component {
         )
     }
 }
+//create functions to write to store
 const mapDispatchToProps = (dispatch) => {
     return {
         setFilter: (filter) => { dispatch({ type: 'SET_FILTER', filter }) }
     }
 }
-
+//get values from store
 const mapStateToProps = (state) => {
     return ({
         filter: state.filter,
@@ -87,4 +88,6 @@ const mapStateToProps = (state) => {
         state: state
     });
 };
+
+//wrap component in connect function to connect to store
 export default connect(mapStateToProps, mapDispatchToProps)(ListItem);
