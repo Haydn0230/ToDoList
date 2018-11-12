@@ -98,6 +98,7 @@ class AccountAdmin extends Component {
         return (
             <div className='account-container'>
                 <form>
+                    <button onClick={this.handleDelete} type='button' className='btn-delete-user'>DELETE ACCOUNT</button>
                     <span className='account-block'>
                         <label htmlFor='firstName' >First Name</label>
                         <input type='text' id='firstName' name="firstName" onChange={this.handleChange} className='account-input' />
@@ -105,7 +106,7 @@ class AccountAdmin extends Component {
 
                     <span className='account-block'>
                         <label htmlFor='lastName' >Last Name</label>
-                        <input type='text' id='lastName' name="lastName" onChange={this.handleChange} className='saccount-input' />
+                        <input type='text' id='lastName' name="lastName" onChange={this.handleChange} className='account-input' />
                     </span>
 
                     <span className='account-block'>
@@ -125,7 +126,6 @@ class AccountAdmin extends Component {
 
                     {errorMessage !== '' && <p className='error-message'>{errorMessage}</p>}
                     <button onClick={this.handleSubmit} type='button' className='btn-save' >Save</button>
-                    <button onClick={this.handleDelete} type='button' className='btn-delete-user'>DELETE ACCOUNT</button>
                 </form>
             </div>
         )

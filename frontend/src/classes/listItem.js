@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-// import ListItemEdit from './listItemEdit'
 import ListItemAdd from './listItemAdd'
-// import ListItemDelete from './listItemDelete'
-// import CheckBox from './listItemCheckbox'
 import { connect } from 'react-redux'
 import SingleListItem from './singleListItem'
 

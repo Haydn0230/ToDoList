@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import store from '../store'
 import { connect } from 'react-redux'
-import project from './project';
-import { Button, Modal } from 'semantic-ui-react'
-import _ from 'lodash'
+import { Button} from 'semantic-ui-react'
 import { validation } from '../utils'
 
 

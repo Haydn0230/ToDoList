@@ -34,7 +34,7 @@ module.exports = {
     deleteProject: (req, res, next) => {
         Project.findByIdAndRemove({ _id: req.params.id })
             .then((project) => {
-                res.send(project);
+                res.status(200).json({"Status":"success"});
             }).catch(next);
 
     }

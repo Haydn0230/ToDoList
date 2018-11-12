@@ -1,3 +1,22 @@
+# Whats to do? to do list 
+
+# Made by 
+- Haydn Brierley-Jones
+
+# Overview
+This to do list application is created to be a generic multi-user project manager that can be applied to most projects where team members need to collaborate on tasks. 
+
+# Technologies used
+Ui
+- React 
+- Redux
+- axios 
+Backend
+- node.js 
+- mongo 
+- mongoose
+
+# About the React App
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>

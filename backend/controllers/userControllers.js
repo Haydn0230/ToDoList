@@ -60,8 +60,8 @@ module.exports = {
     },
     putUser: (req, res, next) => {
         User.findByIdAndUpdate({ _id: req.params.id }, req.body)
-            .then(() => {
-                res.json({ "status": "200" });
+            .then((user) => {
+                res.status(200).json({ "user": user });
             }).catch(next);
     },
     deleteUser: (req, res, next) => {

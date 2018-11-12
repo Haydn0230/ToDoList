@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import store from '../store'
 import { connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 

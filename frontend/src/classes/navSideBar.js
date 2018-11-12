@@ -3,6 +3,8 @@ import '../styles/sideBar.css';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+//side bar adapted from https://www.youtube.com/watch?v=l6nmysZKHFU
+
 class SideBar extends Component {
 
     LogOut = () => {
@@ -26,12 +28,18 @@ class SideBar extends Component {
                     <li><Link to='/Home'>Home</Link></li>
                     <li><Link to='/Project'>Projects</Link></li>
                     {isAuth ? (
-                        <li>
-                            <Link to='/Home'>
-                                <button className='side-bar-btn' onClick={this.LogOut}>Log Out</button>
-                            </Link>
+                        <React.Fragment>
+                            <li>
+                                <Link to='/Account'>Account</Link>
+                            </li>
+                            <li>
+                                <Link to='/Home'>
+                                    <button className='navBar-btn' onClick={this.LogOut}>Log Out</button>
+                                </Link>
 
-                        </li>
+                            </li>
+
+                        </React.Fragment>
                     ) : (
                             <React.Fragment>
                                 <li><Link to='/login'>Log In</Link></li>

@@ -13,9 +13,17 @@
 }
 
 .account-container button {
-    margin: auto;
+    margin: 20px auto;
 }
-
+.btn-delete-user{
+    background-color: #FF1654;
+    height:40px;
+    width:120px;
+    
+    border-radius: 10px; 
+    font-size:15px;
+    color:white;
+}
 /* project view */
 .project-grid-project {
     margin: 10px;
@@ -414,16 +422,23 @@ font-size:30;
 }
 /* sign up form */
 .sign-up-block {
-    display:block;
+    display:flex;
+    flex-direction: column;
     text-align:left;
     margin: 20px 0;
+}
+.sign-up button {
+    margin:auto;
 }
 .sign-up {
     margin:0 40%;
 }
+.sign-up form{
+    display:flex;
+    flex-direction: column;
+}
 .sign-up-input {
     float:right;
-   margin-left:20px;
    text-align: center;
    font-size: 16px;
 

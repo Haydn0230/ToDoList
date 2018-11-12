@@ -14,8 +14,6 @@ let database =require('./database');
 database._connect();
 
 routes(app)
-console.log("working")
-// app.use('/authUser', authUser);
 
 app.use((err,req,res,next)=> {
     res.status(422).send({error:err.message});

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import _ from 'lodash'
 import { validation } from '../utils'
 
 class ProjectAdd extends Component {

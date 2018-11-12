@@ -3,11 +3,9 @@ const mongoose = require('mongoose');
 
 module.exports = {
     getUsersProject: (req,res,next) => {
-        Project.find({"userAccess.userID":req.params.id})
+        Project.find({"userAccess.userId":req.params.id})
             .then((project) =>{
                 res.status(200).send(project);
-                console.log("success")
-                //res.json({"state":"IT LIVES"})
             })
             .catch(next)
     },
