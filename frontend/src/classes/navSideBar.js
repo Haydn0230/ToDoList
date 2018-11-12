@@ -25,7 +25,7 @@ class SideBar extends Component {
         return (
             <nav className='side-bar'>
                 <ul className='side-bar-ul'>
-                    <li><Link to='/Home'>Home</Link></li>
+                    {/* <li><Link to='/Home'>Home</Link></li> */}
                     <li><Link to='/Project'>Projects</Link></li>
                     {isAuth ? (
                         <React.Fragment>

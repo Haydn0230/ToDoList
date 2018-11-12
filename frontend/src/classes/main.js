@@ -18,7 +18,7 @@ class Main extends Component {
             <main>
                     {isAuth ? (
                     <Switch>
-                        <Route path='/Home' render={() => (<Home {...this.props} />)} />
+                        
                         <Route path='/Project' render={() => (<Project {...this.props} />)} />
                         <Route path='/ProjectView' render={() =>(<ProjectList {...this.props}/>)}/>
                         <Route path='/ProjectAdd' render={() =>(<ProjectAdd {...this.props}/>)}/>
@@ -26,6 +26,7 @@ class Main extends Component {
                     </Switch>
                     ) : (
                     <Switch>
+                        <Route path='/' render={() => (<LogIn {...this.props} />)} />
                         <Route path='/SignUp' render={() => (<SignUp {...this.props} />)} />
                         <Route path='/Home' render={() => (<Home {...this.props} />)} />
                         <Route path='/Login' render={() => (<LogIn {...this.props} />)} />

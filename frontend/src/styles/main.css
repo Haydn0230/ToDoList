@@ -74,6 +74,9 @@
     width:33%;
 
 }
+button {
+    outline:none;
+}
 /* add user form */
 .add-user{
     margin: 10px auto;

@@ -27,7 +27,7 @@ class NavBar extends Component {
                 </div>
                 <div className='spacer' />
                 <ul className='navBar-ul'>
-                    <li><Link to='/Home'>Home</Link></li>
+                    {/* <li><Link to='/Home'>Home</Link></li> */}
                     <li><Link to='/Project'>Projects</Link></li>
                     {isAuth ? (
                         <React.Fragment>
