@@ -15,7 +15,7 @@ export const validation = (props) => {
     for (const key in object) {
         if (object.hasOwnProperty(key)) {
             const element = object[key];
-            if (element === '' && key !== 'errorMessage') {
+            if (element.trim() === '' && key !== 'errorMessage') {
                 if (error ==='' ){
                     error += _.startCase(key)
                 } else {

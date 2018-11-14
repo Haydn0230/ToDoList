@@ -26,10 +26,10 @@ class Main extends Component {
                     </Switch>
                     ) : (
                     <Switch>
-                        <Route path='/' render={() => (<LogIn {...this.props} />)} />
                         <Route path='/SignUp' render={() => (<SignUp {...this.props} />)} />
                         <Route path='/Home' render={() => (<Home {...this.props} />)} />
                         <Route path='/Login' render={() => (<LogIn {...this.props} />)} />
+                        <Route path='/' render={() => (<LogIn {...this.props} />)} />
                     </Switch>
                     )
                     }
