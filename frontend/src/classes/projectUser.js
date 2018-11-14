@@ -106,7 +106,9 @@ class ProjectUser extends Component {
 
     deleteUser = (e) => {
         e.preventDefault();
-
+        //check if user is owner
+        console.log('e = ',e.target, 'this =',this.props.projectOne[0].projectOwner)
+        if (e.target.userId === this.props.projectOne[0].projectOwner) return
         const config = {
             "headers": { 'Authorization': 'bearer ' + this.props.cookies }
         }
@@ -116,7 +118,7 @@ class ProjectUser extends Component {
                 '_id': e.target.id
             }
         }
-        console.log("DATA", e.target.value)
+        
         const projectOneNew = this.props.projectOne;
 
         axios.put('/projectUser/' + this.props.projectOne[0]._id, data, config)
@@ -154,15 +156,15 @@ class ProjectUser extends Component {
                 {!this.state.addUser ? (
                     <React.Fragment>
                         {userAccess.map(Users => {
-                            const { firstName, lastName, _id } = Users
-                            
+                            const { firstName, lastName, _id, userId } = Users
+                            console.log(userId)
                             return (
                                 <div className='userCircle' key={firstName}>
                                     
                                     <p className='userCircle-intials'>{this.getFirstLetter(firstName)}.</p>
                                     <p className='userCircle-intials'>{this.getFirstLetter(lastName)}.</p>
-                                    <button onClick={this.deleteUser} value={_id} className='btn-delete'>
-                                        <FontAwesomeIcon id={_id} icon='user-minus'/>   
+                                    <button onClick={this.deleteUser()} value={_id} className='btn-delete'>
+                                        <FontAwesomeIcon id={_id}  icon='user-minus'/>   
                                     </button>
                                 </div>
                             )

@@ -38,7 +38,7 @@ class AccountAdmin extends Component {
         axios.delete('/user/' + this.props.userId, config)
             .then(() => {
                 this.LogOut();
-                this.props.history.push('/Home');
+                this.props.history.push('/Login');
             })
             .catch((err) => {
 

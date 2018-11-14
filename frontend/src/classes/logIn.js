@@ -1,7 +1,7 @@
 import React, { Component } from '../../node_modules/react';
 import axios from 'axios';
 import { connect } from 'react-redux'
-import {validation} from '../utils'
+import { validation } from '../utils'
 
 class LogIn extends Component {
     constructor() {
@@ -9,7 +9,7 @@ class LogIn extends Component {
         this.state = {
             email: '',
             password: '',
-            errorMessage:''
+            errorMessage: ''
         };
     }
 
@@ -26,16 +26,14 @@ class LogIn extends Component {
 
         //verification of inputs 
         const errors = validation(this.state)
-        
+
         //if inputs arent populated throw error message
         if (errors !== '') {
             this.setState({
-                errorMessage:errors + ' required'
+                errorMessage: errors + ' required'
             })
             return
         }
-
-        
 
         axios.post('/verify', {
             "email": this.state.email,
@@ -48,10 +46,12 @@ class LogIn extends Component {
                 this.props.setUserId(res.data.user._id)
                 this.props.setUser(res.data.user)
                 this.props.setLoading(true);
-                this.props.history.push('/Project');
+
+                this.props.history.push('/Project', { userId: res.data.user._id })
+
             })
             .catch((err) => {
-                if (err.response.status === 400 || err.response.status === 401){
+                if (err.response.status === 400 || err.response.status === 401) {
                     this.setState({
                         errorMessage: 'Username or/and password not recognised'
                     })
@@ -61,18 +61,18 @@ class LogIn extends Component {
     }
 
     render() {
-        const {errorMessage} = this.state
+        const { errorMessage } = this.state
         return (
             <div className="logIn">
                 <form>
                     <span className='logIn-block'>
-                    <label htmlFor="userName" >Username</label>
-                    <input type='text' id='email' name="email" onChange={this.handleChange} className='logIn-input'/>
+                        <label htmlFor="userName" >Username</label>
+                        <input type='text' id='email' name="email" onChange={this.handleChange} className='logIn-input' />
                     </span>
 
                     <span className='logIn-block'>
-                    <label htmlFor='password' >Password</label>
-                    <input type='password' id='password' name="password" onChange={this.handleChange} className='logIn-input'/>
+                        <label htmlFor='password' >Password</label>
+                        <input type='password' id='password' name="password" onChange={this.handleChange} className='logIn-input' />
                     </span>
 
                     {errorMessage !== '' && <p className='error-message'>{errorMessage}</p>}
@@ -95,6 +95,7 @@ const mapDispatchToProps = (dispatch) => {
 //get values from store
 const mapStateToProps = (state) => {
     return ({
+        userId: state.userId,
         user: state.user,
         cookies: state.cookies,
         projectOne: state.projectOne,

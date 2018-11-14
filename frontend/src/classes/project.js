@@ -16,7 +16,6 @@ class Project extends Component {
     }
 
 
-
     getProjects() {
 
         //set authorization
@@ -24,7 +23,9 @@ class Project extends Component {
             "headers": { 'Authorization': 'bearer ' + this.props.cookies }
         }
 
-        axios.get('/getProjects/' + this.props.userId, config)
+        const { userId } = this.props.location.state
+
+        axios.get('/getProjects/' + userId, config)
             .then((res) => {
 
                 //check if theres anything in the response element
@@ -40,6 +41,7 @@ class Project extends Component {
                 console.log(err);
             })
     }
+
 
     //when component mounts trigger request to get projects
     componentDidMount() {
