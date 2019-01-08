@@ -22,9 +22,15 @@ class Project extends Component {
         var config = {
             "headers": { 'Authorization': 'bearer ' + this.props.cookies }
         }
-
-        const { userId } = this.props.location.state
-
+        console.log(this.props.history.location.state)
+        let userId
+        if (this.props.history.location.state ===undefined) {
+            userId = this.props.userId
+        } else {
+            userId = this.props.history.location.state.userId; 
+        }
+        
+    
         axios.get('/getProjects/' + userId, config)
             .then((res) => {
 

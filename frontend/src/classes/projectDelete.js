@@ -11,7 +11,7 @@ class ProjectDelete extends Component {
         let projectSelected = projectAll.filter(project => {
             return this.props.id === project._id
         });
-        console.log('projectSelected', userId,projectSelected[0].userAccess[0].userId);
+        // console.log('projectSelected', userId,projectSelected[0].userAccess[0].userId);
         if (userId === projectSelected.projectOwner) {
             return 'owner'
         } else {

@@ -46,7 +46,7 @@ class LogIn extends Component {
                 this.props.setUserId(res.data.user._id)
                 this.props.setUser(res.data.user)
                 this.props.setLoading(true);
-
+                console.log('user id ', res.data.user._id)
                 this.props.history.push('/Project', { userId: res.data.user._id })
 
             })

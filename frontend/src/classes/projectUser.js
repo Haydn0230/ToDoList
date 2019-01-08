@@ -106,9 +106,24 @@ class ProjectUser extends Component {
 
     deleteUser = (e) => {
         e.preventDefault();
-        //check if user is owner
-        console.log('e = ',e.target, 'this =',this.props.projectOne[0].projectOwner)
-        if (e.target.userId === this.props.projectOne[0].projectOwner) return
+
+        //if no value passed then return
+        if (!e.target.id) {
+            return
+        }
+
+        //get user id from _id to check against projectOwner
+        let userId = this.props.projectOne[0].userAccess.filter(users => {
+            if (e.target.id === users._id) {
+                return users.userId
+            }
+        });
+
+        //if the user is a project user then escape function
+        if (userId[0].userId===this.props.projectOne[0].projectOwner) {
+            return
+        }
+        
         const config = {
             "headers": { 'Authorization': 'bearer ' + this.props.cookies }
         }
@@ -163,7 +178,7 @@ class ProjectUser extends Component {
                                     
                                     <p className='userCircle-intials'>{this.getFirstLetter(firstName)}.</p>
                                     <p className='userCircle-intials'>{this.getFirstLetter(lastName)}.</p>
-                                    <button onClick={this.deleteUser()} value={_id} className='btn-delete'>
+                                    <button onClick={this.deleteUser} value={_id} className='btn-delete'>
                                         <FontAwesomeIcon id={_id}  icon='user-minus'/>   
                                     </button>
                                 </div>
